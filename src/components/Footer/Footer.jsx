@@ -19,7 +19,7 @@ const Footer = () => {
               Яндекс.Практикум
             </a>
             <a
-              href="https://github.com/AlekseyDream"
+              href="https://github.com/AlekseyDream/"
               target="_blank"
               rel="noopener noreferrer"
               className="footer__link"

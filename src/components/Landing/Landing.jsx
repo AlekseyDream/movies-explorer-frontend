@@ -1,13 +1,13 @@
-import './Main.css';
+import './Landing.css';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 
-const Main = () => {
+function Landing() {
   return (
-    <main className="main">
+    <main className="Landing">
       <Promo />
       <AboutProject />
       <Techs />
@@ -17,4 +17,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Landing;
