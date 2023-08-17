@@ -1,13 +1,13 @@
-import './Landing.css';
+import './Main.css';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 
-function Landing() {
+function Main() {
   return (
-    <main className="Landing">
+    <main className="Main">
       <Promo />
       <AboutProject />
       <Techs />
@@ -17,4 +17,4 @@ function Landing() {
   );
 };
 
-export default Landing;
+export default Main;

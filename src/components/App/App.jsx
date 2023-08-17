@@ -1,13 +1,19 @@
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Landing from '../Landing/Landing';
+import Movies from '../Movies/Movies';
 import './App.css';
 
-function App() {
+const App = () => {
+  const loggedIn = true;
+  const isBurgerOpened = false;
+
   return (
     <div className="app">
-      <Header></Header>
-      <Landing></Landing>
+      <Header loggedIn={loggedIn}
+        isBurgerOpened={isBurgerOpened} />
+      <Landing />
+      <Movies />
       <Footer />
     </div>
   );
