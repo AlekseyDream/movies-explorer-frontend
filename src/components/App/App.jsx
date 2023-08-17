@@ -1,6 +1,6 @@
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import Landing from '../Landing/Landing';
+import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import './App.css';
 
@@ -12,7 +12,7 @@ const App = () => {
     <div className="app">
       <Header loggedIn={loggedIn}
         isBurgerOpened={isBurgerOpened} />
-      <Landing />
+      <Main />
       <Movies />
       <Footer />
     </div>
