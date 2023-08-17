@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <header className="header header_theme">
+    <header className="header header_theme_mazarine">
       <div className="header__container">
         <Link
           to="/"
