@@ -1,6 +1,7 @@
 import './Header.css';
 import Logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import { Link } from 'react-router-dom';
 
 function Header() {
@@ -16,6 +17,7 @@ function Header() {
             alt="Логотип"
           />
         </Link>
+        <BurgerMenu />
         <Navigation />
       </div>
     </header>
