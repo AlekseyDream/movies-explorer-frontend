@@ -5,7 +5,7 @@
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 70px 70px 159px;
+  padding: 0 70px 159px;
 }
 
 .movies-cards__list {
@@ -16,7 +16,7 @@
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   grid-auto-rows: 218px;
-  row-gap: 32px;
+  row-gap: 51px;
   column-gap: 20px;
   justify-items: center;
   border-top: 1px solid rgba(170, 170, 170, 0.2);
@@ -30,7 +30,7 @@
   border-style: none;
   padding: 10px 0;
   color: #fff;
-  margin-top: 50px;
+  margin-top: 73px;
   transition: all 0.3s ease;
   cursor: pointer;
   font-family: Inter;

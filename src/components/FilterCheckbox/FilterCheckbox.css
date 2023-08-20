@@ -90,19 +90,32 @@
 }
 
 @media screen and (max-width: 400px) {
+  .checkbox {
+    display: inline-block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #424242;
+    margin: 16px 30px 16px 0;
+  }
+
+
   .checkbox__inner {
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
     line-height: 18px;
     padding-right: 48px;
+    position: absolute;
+    bottom: -45px;
+    right: 50px;
   }
 
   .checkbox__inner:after {
-    left: 118px;
+    left: -45px;;
   }
 
   .checkbox__input:checked + .checkbox__inner::after {
-    left: 132px;
+    left: -30px;
   }
 }

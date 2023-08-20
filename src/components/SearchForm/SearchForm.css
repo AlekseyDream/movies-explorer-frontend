@@ -1,7 +1,7 @@
 .search-container {
   max-width: 1280px;
   width: 100%;
-  padding: 80px 70px 83px;
+  padding: 70px 70px 69px;
   margin: 0 auto;
   display: flex;
   box-sizing: border-box;
@@ -12,7 +12,6 @@
 
 .search__input-block {
   display: flex;
-  align-items: center;
   height: 100%;
   width: calc(100% - 90px);
   align-items: center;
@@ -21,6 +20,7 @@
 .search__form {
   display: flex;
   max-width: 1140px;
+  min-width: 300px;
   height: 72px;
   width: 100%;
   position: relative;
@@ -92,11 +92,16 @@
     padding: 85px 14px 50px;
   }
 
+  .search__input-block {
+    justify-content: space-around;
+  }
+
   .search__input-box {
     text-align: left;
     font-size: 18px;
     line-height: 1.22;
     padding-left: 0;
+    justify-content: space-between;
   }
 
   .search__button {
