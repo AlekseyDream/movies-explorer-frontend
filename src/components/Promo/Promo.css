@@ -37,7 +37,7 @@
   width: 626px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 770px) {
   .promo__container {
     padding: 300px 44px 70px 44px;
   }

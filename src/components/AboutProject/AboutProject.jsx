@@ -11,8 +11,8 @@ const AboutProject = () => {
               Дипломный проект включал 5 этапов
             </h4>
             <p className="two-columns__main-paragraph">
-              Составление плана, работу над бэкендом, вёрстку, добавление
-              функциональности и финальные доработки.
+              Составление плана, работу над бэкендом, вёрстку, 
+              добавление функциональности и финальные доработки.
             </p>
           </article>
           <article className="two-columns">
@@ -38,6 +38,6 @@ const AboutProject = () => {
       </div>
     </section>
   );
-}
+};
 
 export default AboutProject;

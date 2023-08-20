@@ -1,17 +1,17 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.jsx';
-import cards from '../../images/cards';
+import films from '../../utils/films';
 
 const MoviesCardList = () => {
   return (
     <section className="movies-cards">
       <ul className="movies-cards__list">
-        {cards.map((cards, index) => {
+        {films.map((films, index) => {
           return (
             <MoviesCard
               key={index}
-              image={cards.image}
-              name={cards.nameRU}
+              image={films.image}
+              name={films.nameRU}
             />
           );
         })}

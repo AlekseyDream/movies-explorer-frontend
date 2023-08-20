@@ -28,7 +28,7 @@ const MoviesCard = (props) => {
                 className="movies-card__input"
                 type="checkbox"
               />
-              <span className="movies-card__checkbox"></span>
+              <span className="movies-card__like"></span>
             </label>
           ) : (
             <button

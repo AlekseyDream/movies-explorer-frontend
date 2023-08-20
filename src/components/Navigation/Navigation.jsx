@@ -1,11 +1,11 @@
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './Navigation.css';
 
-const Navigation = ({ loggedIn }) => {
+const Navigation = ({ isLoggedIn, logIn }) => {
   return (
     <>
-      {!loggedIn ? (
+      {!isLoggedIn ? (
         <nav className="navigation">
           <Link
             to="/signup"
@@ -16,30 +16,31 @@ const Navigation = ({ loggedIn }) => {
           <Link
             to="/signin"
             className="navigation__link navigation__link_type_active"
+            onClick={logIn}
           >
             Войти
           </Link>
         </nav>
       ) : (
-        <nav className="navigation">
-          <NavLink
-            to="/main"
+        <nav className="navigation navigation__link-movies">
+          <Link
+            to="/movies"
             className="navigation__link navigation__link_type_film"
           >
             Фильмы
-          </NavLink>
-          <NavLink
-            to="/main"
+          </Link>
+          <Link
+            to="/saved-movies"
             className="navigation__link navigation__link_type_save-film"
           >
             Сохранённые фильмы
-          </NavLink>
-          <NavLink
+          </Link>
+          <Link
             to="/profile"
             className="navigation__link navigation__link_type_account"
           >
             Аккаунт
-          </NavLink>
+          </Link>
         </nav>
       )}
     </>

@@ -76,7 +76,7 @@
     letter-spacing: -0.56px;
   }
   
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 770px) {
     .techs__container {
       margin-top: 91px;
       padding: 0 50px;
@@ -110,7 +110,7 @@
     }
   }
   
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 500px) {
     .techs__container {
       margin-top: 51px;
     }

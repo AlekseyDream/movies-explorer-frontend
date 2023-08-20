@@ -1,18 +1,20 @@
 import './SearchForm.css';
-import useFormWithValidation from '../Hooks/useFormWithValidation';
+import useFormWithValidation from '../hooks/useFormWithValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 const SearchForm = () => {
   const { values, handleChange } = useFormWithValidation();
   return (
-    <section className="search-container">
+    <section className="search-container" aria-label="Форма поиска">
       <form
         className="search__form"
         name="search"
         noValidate
       >
+        <div className="search__input-block">
         <input
-          className="search__input-box search__search-logo"
+          className="search__input-box"
+          aria-label="Форма поиска"
           name="search"
           type="text"
           placeholder="Фильм"
@@ -23,8 +25,9 @@ const SearchForm = () => {
         />
         <span className="search__error"></span>
         <button className="search__button" type="submit">Найти</button>
+        </div>
+        <FilterCheckbox />
       </form>
-      <FilterCheckbox />
     </section>
   );
 };

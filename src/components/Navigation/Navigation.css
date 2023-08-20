@@ -1,6 +1,5 @@
 .navigation {
   display: flex;
-  gap: 17px;
   justify-content: space-between;
   align-items: center;
 }
@@ -31,6 +30,7 @@
   border-radius: 3px;
   background: #3ddc84;
   transition: all 0.1s ease;
+  margin-left: 30px;
 }
 
 .navigation__link_type_active:hover {
@@ -41,6 +41,7 @@
 .navigation__link_type_film {
   font-size: 13px;
   line-height: 18px;
+  padding-right: 16px;
 }
 
 .navigation__link_type_save-film {
@@ -59,7 +60,6 @@
   padding-left: 11px;
   padding-right: 37px;
   min-height: 26px;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
   border-radius: 40px;
 }
 
