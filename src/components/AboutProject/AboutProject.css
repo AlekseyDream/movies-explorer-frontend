@@ -137,10 +137,11 @@
     letter-spacing: -0.72px;
     padding: 0 0 28px;
     margin-bottom: 5px;
+    border-block-end: solid 1px #000000;
   }
 
   .two-columns__main-text {
-    padding: 56px 0 18px;
+    padding: 56px 0 16px;
     font-size: 18px;
     letter-spacing: -0.72px;
   }

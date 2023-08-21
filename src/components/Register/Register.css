@@ -1,7 +1,7 @@
 .register {
   max-width: 1280px;
   width: 100%;
-  margin: 74px;
+  margin: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,23 +69,22 @@
   font-size: 10px;
   line-height: 1.2;
   color: #8b8b8b;
-  padding-bottom: 7px;
 }
 
 .register__input {
-  padding: 15px 15px;
+  padding: 5px 15px 10px 15px;
   box-sizing: border-box;
   border-style: none;
   font-weight: 400;
   font-size: 13px;
   line-height: normal;
-  background-color: rgba(47, 47, 47, 1);
+  background-color: transparent;
   color: #fff;
-  border-radius: 8px;
+  border-bottom: 1px solid #424242;
 }
 
 .register__input_error {
-  color: rgba(238, 52, 101, 1);
+  color: #EE3465;
 }
 
 .register__input[type='email'] {
@@ -96,14 +95,18 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 1.2;
-  color: rgba(238, 52, 101, 1);
+  color: #EE3465;
   position: absolute;
-  top: 74px;
+  top: 55px;
   left: 0;
 }
 
+.register__button-block {
+  text-align: center;
+}
+
 .register__button {
-  margin-top: auto;
+  margin: 115px 0 16px 0;
   border-style: none;
   background-color: #4285f4;
   border-radius: 3px;
@@ -137,7 +140,6 @@
   font-size: 14px;
   line-height: 1.21;
   color: #8b8b8b;
-  text-align: center;
 }
 
 @media screen and (max-width: 400px) {

@@ -1,8 +1,8 @@
 .not-found {
   display: flex;
   min-height: 100vh;
+  margin: 246px auto 0;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
 }
@@ -35,12 +35,8 @@
   font-size: 14px;
   line-height: 1.21;
   color: #4285f4;
-  padding: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 60px;
   transition: all 0.3s ease;
+  margin: 184px auto 0;
 }
 
 .not-found__button:hover {
@@ -48,12 +44,16 @@
 }
 
 @media screen and (max-width: 770px) {
-  .not-found__button {
-    bottom: 212px;
+  .not-found {
+    margin: 408px auto 0;
   }
 }
 
 @media screen and (max-width: 400px) {
+  .not-found {
+    margin: 329px auto 0;
+  }
+
   .not-found__text-container {
     gap: 10px;
   }
@@ -70,6 +70,6 @@
   .not-found__button {
     font-size: 12px;
     line-height: 1.25;
-    bottom: 30px;
+    margin: 284px auto 0;
   }
 }

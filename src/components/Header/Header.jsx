@@ -11,12 +11,11 @@ const Header = ({ isLoggedIn, logIn }) => {
 
   return (
     <header
-      className={`header header_theme_${
-        location.pathname === '/' ? 'mazarine' : 'dark'
-      }`}
+      className={`header header_theme_${location.pathname === '/' ? 'mazarine' : 'dark'
+        }`}
     >
       <div className="header__container">
-      <Link
+        <Link
           to="/"
           className="header__link"
         >

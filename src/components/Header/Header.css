@@ -35,6 +35,7 @@
   transform: rotate(45deg);
 }
 
+
 @media screen and (max-width: 770px) {
   .header__container {
     padding: 18px 30px;

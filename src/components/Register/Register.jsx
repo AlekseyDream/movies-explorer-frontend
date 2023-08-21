@@ -83,6 +83,7 @@ const Register = ({ register }) => {
             <span className="register__error">{errors.password || ''}</span>
           </label>
         </div>
+        <div className="register__button-block">
         <button
           type="submit"
           className={`register__button ${
@@ -102,6 +103,7 @@ const Register = ({ register }) => {
             Войти
           </Link>
         </span>
+        </div>
       </form>
     </main>
   );
