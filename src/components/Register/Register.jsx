@@ -82,9 +82,7 @@ const Register = ({ register }) => {
             />
             <span className="register__error">{errors.password || ''}</span>
           </label>
-        </div>
-        <div className="register__button-block">
-        <button
+          <button
           type="submit"
           className={`register__button ${
             !isValid && 'register__button_disabled'
@@ -93,6 +91,8 @@ const Register = ({ register }) => {
         >
           Зарегистрироваться
         </button>
+        </div>
+        <div className="register__button-block">
         <span className="register__support">
           Уже зарегистрированы?&nbsp;
           <Link

@@ -1,7 +1,7 @@
 .search-container {
   max-width: 1280px;
   width: 100%;
-  padding: 77px 70px 69px;
+  padding: 70px 70px 69px;
   margin: 0 auto;
   display: flex;
   box-sizing: border-box;
@@ -36,7 +36,7 @@
   background-position: 19px 50%;
   border: none;
   border-radius: 9px;
-  outline:none;
+  outline: none;
   height: 100%;
   width: calc(100% - 150px);
   padding: 0 0 0 63px;
@@ -85,6 +85,14 @@
   .search {
     padding: 73px 30px 61px;
   }
+
+  .search__input-block {
+    width: calc(100% - 200px);
+}
+
+  .search-container {
+    padding: 80px 30px 109px;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -99,9 +107,10 @@
 
   .search__form {
     justify-content: space-around;
-}
+  }
 
   .search__input-block {
+    width: calc(100% - 90px);
     justify-content: space-between;
   }
 

@@ -133,31 +133,8 @@
   border-color: aliceblue;
 }
 
-@media screen and (max-width: 1278px) {
-  .movies-card__title {
-    max-width: 280px;
-  }
-}
+@media screen and (max-width: 770px) {
 
-@media screen and (max-width: 1184px) {
-  .movies-card__title {
-    max-width: 240px;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .movies-card__title {
-    max-width: 220px;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .movies-card__title {
-    max-width: 320px;
-  }
-}
-
-@media screen and (max-width: 800px) {
   .movies-card__image {
     height: 190px;
   }

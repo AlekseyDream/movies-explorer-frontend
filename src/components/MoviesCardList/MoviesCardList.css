@@ -51,24 +51,21 @@
 
   .movies-cards__list {
     column-gap: 32px;
-  }
-
-  .movies-cards__list {
-    row-gap: 30px;
+    row-gap: 80px;
   }
 
   .movies-cards__add-button {
-    margin-top: 79px;
+    margin-top: 112px;
   }
 }
 
 @media screen and (max-width: 770px) {
   .movies-cards__list {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    padding: 50px 0 0;
+    padding: 80px 0 0;
   }
   .movies-cards {
-    padding: 0 10px 80px;
+    padding: 0 30px 80px;
   }
 }
 
@@ -76,8 +73,14 @@
   .movies-cards__list {
     grid-auto-rows: 237px;
     row-gap: 46px;
+    padding: 50px 0 0;
   }
   .movies-cards {
     padding: 0 10px 159px;
+  }
+
+  .movies-cards__add-button {
+    margin-top: 72px;
+    max-width: 240px;
   }
 }

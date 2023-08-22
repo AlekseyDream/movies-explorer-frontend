@@ -159,7 +159,7 @@ const films = [
   },
   {
     id: 14,
-    nameRU: 'Скейт-кухня',
+    nameRU: 'Скейт — кухня',
     nameEN: 'Skate Kitchen',
     director: 'Кристал Мозелл',
     country: 'США, Великобритания, Бразилия',

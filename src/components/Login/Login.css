@@ -142,9 +142,15 @@
   left: 14%;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 770px) {
   .login {
-    padding-top: 56px;
+    margin: 232px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .login {
+    margin-top: 56px;
     justify-content: flex-start;
   }
 
@@ -152,7 +158,6 @@
     align-items: center;
     gap: 50px;
     max-width: 260px;
-    flex: 1;
   }
 
   .login__labels-container {
@@ -162,7 +167,7 @@
   .login__button {
     font-size: 12px;
     line-height: 1.25;
-    margin-top: 217px;
+    margin-top: 260px;
   }
 
   .login__support {

@@ -64,29 +64,24 @@
 
 @media screen and (max-width: 770px) {
   .checkbox__inner {
-    padding-left: 0;
-    padding-right: 44px;
+    padding-left: 62px;
+    padding-right: 0;
   }
 
   .checkbox__inner:after {
-    left: 132px;
-    top: 5px;
-    width: 8px;
-    height: 8px;
+    left: 17px;
+    top: 1px;
   }
 
   .checkbox__inner:before {
     width: 34px;
     height: 19px;
-  }
-
-  .checkbox__input:checked+.checkbox__inner::before {
-    background-color: rgba(43, 224, 128, 1);
+    right: 132px;
+    top: 0px;
   }
 
   .checkbox__input:checked+.checkbox__inner::after {
-    left: 146px;
-    background-color: rgba(255, 255, 255, 1);
+    left: 29px;
   }
 }
 
@@ -109,12 +104,18 @@
     right: 29px;
   }
 
+
+  .checkbox__inner:before {
+    right: 161px;
+    top: 0px;
+  }
+
   .checkbox__inner:after {
-    left: -45px;
+    left: 14px;
     ;
   }
 
   .checkbox__input:checked+.checkbox__inner::after {
-    left: -30px;
+    left: 32px;
   }
 }

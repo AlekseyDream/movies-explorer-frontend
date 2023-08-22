@@ -142,9 +142,15 @@
   color: #8b8b8b;
 }
 
+@media screen and (max-width: 770px) {
+  .register {
+    margin: 232px;
+  }
+}
+
 @media screen and (max-width: 400px) {
   .register {
-    padding-top: 56px;
+    margin-top: 56px;
   }
 
   .register__form {
@@ -161,14 +167,14 @@
   .register__button {
     font-size: 12px;
     line-height: 1.25;
-    margin-top: 130px;
+    margin-top: 223px;
   }
 
   .register__support {
     position: absolute;
     font-size: 12px;
     line-height: 1.25;
-    bottom: -29px;
+    bottom: -170px;
     left: 36px;
   }
 
