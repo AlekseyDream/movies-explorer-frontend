@@ -17,6 +17,7 @@ export default function Profile({ logOut }) {
             <span className="profile__label-text">Имя</span>
             <input
               name="name"
+              placeholder="Ваше имя"
               className={`profile__input ${
                 errors.name && 'profile__input_error'
               }`}
@@ -34,6 +35,7 @@ export default function Profile({ logOut }) {
             <span className="profile__label-text">E-mail</span>
             <input
               name="email"
+              placeholder="Ваш email"
               className={`profile__input ${
                 errors.email && 'profile__input_error'
               }`}

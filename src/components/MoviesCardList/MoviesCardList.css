@@ -33,7 +33,7 @@
   margin-top: 73px;
   transition: all 0.3s ease;
   cursor: pointer;
-  font-family: Inter;
+  font-family:  'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;

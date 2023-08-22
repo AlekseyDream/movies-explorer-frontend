@@ -81,6 +81,7 @@
   background-color: transparent;
   color: #fff;
   border-bottom: 1px solid #424242;
+  text-align: end;
 }
 
 .login__input_error {

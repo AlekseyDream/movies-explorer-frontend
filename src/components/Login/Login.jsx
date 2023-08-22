@@ -41,6 +41,7 @@ const Login = ({ logIn }) => {
             <span className="login__label-text">E-mail</span>
             <input
               name="email"
+              placeholder="Ваш email"
               className={`login__input ${errors.email && 'login__input_error'}`}
               onChange={handleChange}
               value={values.email || ''}
@@ -53,9 +54,11 @@ const Login = ({ logIn }) => {
             <span className="login__label-text">Пароль</span>
             <input
               name="password"
-              className={`login__input ${
-                errors.password && 'login__input_error'
-              }`}
+              placeholder="Ваш пароль"
+              minLength="2"
+              maxLength="30"
+              className={`login__input ${errors.password && 'login__input_error'
+                }`}
               onChange={handleChange}
               value={values.password || ''}
               type="password"

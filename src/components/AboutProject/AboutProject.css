@@ -180,7 +180,7 @@
   }
 
   .about-project__scheme-title {
-    font-family: Suisse Intl;
+    font-family:  'Inter', 'Arial', 'Helvetica', sans-serif;
     font-size: 11px;
   }
 }

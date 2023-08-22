@@ -1,19 +1,19 @@
-import img1 from './cards/pic__COLOR_pic.jpg';
-import img2 from './cards/pic__COLOR_pic (1).jpg';
-import img3 from './cards/pic__COLOR_pic (2).jpg';
-import img4 from './cards/pic__COLOR_pic (3).jpg';
-import img5 from './cards/pic__COLOR_pic (4).jpg';
-import img6 from './cards/pic__COLOR_pic (5).jpg';
-import img7 from './cards/pic__COLOR_pic (6).jpg';
-import img8 from './cards/pic__COLOR_pic (7).jpg';
-import img9 from './cards/pic__COLOR_pic (8).jpg';
-import img10 from './cards/pic__COLOR_pic (9).jpg';
-import img11 from './cards/pic__COLOR_pic (10).jpg';
-import img12 from './cards/pic__COLOR_pic (11).jpg';
-import img13 from './cards/pic__COLOR_pic (12).jpg';
-import img14 from './cards/pic__COLOR_pic (13).jpg';
-import img15 from './cards/pic__COLOR_pic (14).jpg';
-import img16 from './cards/pic__COLOR_pic (15).jpg';
+import img1 from '../images/cards/pic__COLOR_pic.jpg';
+import img2 from '../images/cards/pic__COLOR_pic (1).jpg';
+import img3 from '../images/cards/pic__COLOR_pic (2).jpg';
+import img4 from '../images/cards/pic__COLOR_pic (3).jpg';
+import img5 from '../images/cards/pic__COLOR_pic (4).jpg';
+import img6 from '../images/cards/pic__COLOR_pic (5).jpg';
+import img7 from '../images/cards/pic__COLOR_pic (6).jpg';
+import img8 from '../images/cards/pic__COLOR_pic (7).jpg';
+import img9 from '../images/cards/pic__COLOR_pic (8).jpg';
+import img10 from '../images/cards/pic__COLOR_pic (9).jpg';
+import img11 from '../images/cards/pic__COLOR_pic (10).jpg';
+import img12 from '../images/cards/pic__COLOR_pic (11).jpg';
+import img13 from '../images/cards/pic__COLOR_pic (12).jpg';
+import img14 from '../images/cards/pic__COLOR_pic (13).jpg';
+import img15 from '../images/cards/pic__COLOR_pic (14).jpg';
+import img16 from '../images/cards/pic__COLOR_pic (15).jpg';
 
 const films = [
   {

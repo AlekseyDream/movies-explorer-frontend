@@ -41,9 +41,9 @@ const Register = ({ register }) => {
             <span className="register__label-text">Имя</span>
             <input
               name="name"
-              className={`register__input ${
-                errors.name && 'register__input_error'
-              }`}
+              placeholder="Ваше имя"
+              className={`register__input ${errors.name && 'register__input_error'
+                }`}
               onChange={handleChange}
               value={values.name || ''}
               type="text"
@@ -58,9 +58,9 @@ const Register = ({ register }) => {
             <span className="register__label-text">E-mail</span>
             <input
               name="email"
-              className={`register__input ${
-                errors.email && 'register__input_error'
-              }`}
+              placeholder="Ваш email"
+              className={`register__input ${errors.email && 'register__input_error'
+                }`}
               onChange={handleChange}
               value={values.email || ''}
               type="email"
@@ -72,9 +72,11 @@ const Register = ({ register }) => {
             <span className="register__label-text">Пароль</span>
             <input
               name="password"
-              className={`register__input ${
-                errors.password && 'register__input_error'
-              }`}
+              placeholder="Ваш пароль"
+              minLength="2"
+              maxLength="30"
+              className={`register__input ${errors.password && 'register__input_error'
+                }`}
               onChange={handleChange}
               value={values.password || ''}
               type="password"
@@ -83,26 +85,25 @@ const Register = ({ register }) => {
             <span className="register__error">{errors.password || ''}</span>
           </label>
           <button
-          type="submit"
-          className={`register__button ${
-            !isValid && 'register__button_disabled'
-          }`}
-          disabled={!isValid}
-        >
-          Зарегистрироваться
-        </button>
+            type="submit"
+            className={`register__button ${!isValid && 'register__button_disabled'
+              }`}
+            disabled={!isValid}
+          >
+            Зарегистрироваться
+          </button>
         </div>
         <div className="register__button-block">
-        <span className="register__support">
-          Уже зарегистрированы?&nbsp;
-          <Link
-            to="/signin"
-            className="register__link"
-            onClick={register}
-          >
-            Войти
-          </Link>
-        </span>
+          <span className="register__support">
+            Уже зарегистрированы?&nbsp;
+            <Link
+              to="/signin"
+              className="register__link"
+              onClick={register}
+            >
+              Войти
+            </Link>
+          </span>
         </div>
       </form>
     </main>
