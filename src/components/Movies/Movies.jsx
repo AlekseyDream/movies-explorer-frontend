@@ -4,10 +4,10 @@ import './Movies.css';
 
 const Movies = () => {
   return (
-    <main className="movies">
+    <section className="movies">
       <SearchForm />
       <MoviesCardList />
-    </main>
+    </section>
   );
 };
 

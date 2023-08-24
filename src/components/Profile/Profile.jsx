@@ -1,11 +1,13 @@
 import './Profile.css';
+import React from "react";
+import { Link } from 'react-router-dom';
 import useFormWithValidation from '../../components/hooks/useFormWithValidation';
 
-export default function Profile({ logOut }) {
+function Profile({ logOut }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   return (
-    <main className="profile">
+    <section className="profile">
       <form
         className="profile__form"
         name="profile"
@@ -14,6 +16,7 @@ export default function Profile({ logOut }) {
         <h1 className="profile__title">Привет, Алексей!</h1>
         <div className="profile__labels-container">
           <label className="profile__label">
+          <div className="profile__input-block">
             <span className="profile__label-text">Имя</span>
             <input
               name="name"
@@ -29,9 +32,11 @@ export default function Profile({ logOut }) {
               maxLength="30"
               pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
             />
+            </div>
             <span className="profile__error-name">{errors.name || ''}</span>
           </label>
           <label className="profile__label">
+          <div className="profile__input-block">
             <span className="profile__label-text">E-mail</span>
             <input
               name="email"
@@ -44,6 +49,7 @@ export default function Profile({ logOut }) {
               type="email"
               required
             />
+            </div>
             <span className="profile__error">{errors.email || ''}</span>
           </label>
         </div>
@@ -57,15 +63,13 @@ export default function Profile({ logOut }) {
           >
             Редактировать
           </button>
-          <button
-            type="submit"
-            className="profile__button-exit"
-            onClick={logOut}
-          >
+          <Link  to="/signin" className="profile__link-exit" onClick={logOut}>
             Выйти из аккаунта
-          </button>
+          </Link>
         </div>
       </form>
-    </main>
+    </section>
   );
 }
+
+export default Profile;

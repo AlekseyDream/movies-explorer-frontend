@@ -19,6 +19,7 @@
   font-weight: 400;
   font-size: 140px;
   line-height: 1.21;
+  margin: 0;
 }
 
 .not-found__error-name {

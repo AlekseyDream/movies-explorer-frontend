@@ -152,8 +152,13 @@
     position: absolute;
     top: 19px;
     right: 33px;
+    cursor: pointer;
   }
 
+  .burger-btn:hover {
+    opacity: 0.8;
+  }
+  
   .burger-btn::before {
     content: '';
     position: absolute;
@@ -184,8 +189,8 @@
 @media screen and (max-width: 400px) {
   .burger-btn {
     position: absolute;
-    top: 18px;
-    right: 18px;
+    top: 11px;
+    right: 20px;
   }
 
   .burger-btn::before {
@@ -195,6 +200,11 @@
   .burger-btn::after {
     width: 22px;
   }
+
+  .burger-menu__links {
+    padding: 143px 0 296px;
+  }
+
   .burger-navigation_type_active {
     width: 100%;
   }

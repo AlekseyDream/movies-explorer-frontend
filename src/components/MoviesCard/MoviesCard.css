@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 0 29px 0;
+  padding: 6px 0 24px 0;
   box-sizing: border-box;
   border-bottom: #434343 1px solid;
 }
@@ -53,16 +53,14 @@
 }
 
 .movies-card__button {
-  position: absolute;
-  bottom: 21px;
-  right: -2px;
   border: none;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  padding: 0;
   cursor: pointer;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
 }
 
 .movies-card__button_type_unsave:hover {
@@ -74,17 +72,14 @@
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-  position: absolute;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  right: -1px;
-  bottom: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
   opacity: 0;
-}
-
-.movies-card__button_type_unsave:hover {
-  opacity: 1;
 }
 
 .movies-card__label {
@@ -103,33 +98,40 @@
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-  position: absolute;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  right: -1px;
-  bottom: -10px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  transition: opacity 0.35s linear;
+  display: inline-block;
 }
 
-.movies-card__input:checked + .movies-card__like::before {
+.movies-card__like:hover {
+  opacity: 0.8;
+}
+
+
+.movies-card__input:checked+.movies-card__like::before {
   content: '';
   background-image: url('../../images/like-red.svg');
   background-repeat: no-repeat;
   background-position: center;
   width: 24px;
   height: 24px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
 }
 
-.movies-card__input:disabled + .movies-card__like::before {
+.movies-card__input:disabled+.movies-card__like::before {
   border-color: aliceblue;
 }
 
-.movies-card__input:checked:disabled + .movies-card__like::before {
+.movies-card__input:checked:disabled+.movies-card__like::before {
   border-color: aliceblue;
 }
 

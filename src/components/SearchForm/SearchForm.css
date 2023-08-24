@@ -48,6 +48,10 @@
   color: #959595;
 }
 
+.searchform__input-box:focus {
+  outline: none;
+}
+
 .search__input-box::placeholder {
   color: #8b8b8b;
 }

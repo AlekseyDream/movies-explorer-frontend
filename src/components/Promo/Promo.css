@@ -17,7 +17,7 @@
 }
 
 .promo__logo {
-  width: 722px;
+  max-width: 722px;
   height: 244px;
   background-image: url(../../images/landing-logo.svg);
   background-repeat: no-repeat;

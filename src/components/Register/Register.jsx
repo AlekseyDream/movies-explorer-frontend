@@ -18,7 +18,7 @@ const Register = ({ register }) => {
   }, [resetForm]);
 
   return (
-    <main className="register">
+    <section className="register">
       <form
         className="register__form"
         name="register"
@@ -84,6 +84,7 @@ const Register = ({ register }) => {
             />
             <span className="register__error">{errors.password || ''}</span>
           </label>
+          <div className="register__footer">
           <button
             type="submit"
             className={`register__button ${!isValid && 'register__button_disabled'
@@ -92,8 +93,6 @@ const Register = ({ register }) => {
           >
             Зарегистрироваться
           </button>
-        </div>
-        <div className="register__button-block">
           <span className="register__support">
             Уже зарегистрированы?&nbsp;
             <Link
@@ -104,9 +103,10 @@ const Register = ({ register }) => {
               Войти
             </Link>
           </span>
+          </div>
         </div>
       </form>
-    </main>
+    </section>
   );
 };
 

@@ -1,11 +1,13 @@
 .navigation {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin: 0;
   padding: 0;
   width: 100%;
+  list-style-type: none;
 }
+
+
 
 .navigation-container {
   max-width: 676px;
@@ -23,15 +25,43 @@
   color: #fff;
 }
 
+
 .navigation__link:hover {
   opacity: 0.8;
 }
 
+.navigation__link-text {
+  list-style-type: none;
+}
+
+
 .navigation__links-login {
   display: flex;
   align-items: center;
-  align-self: center;
   justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+
+.navigation__links-movies {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+
+.navigation__links-account {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
 }
 
 .navigation__link_type_active {
@@ -85,11 +115,6 @@
   background-image: url('../../images/icon-main.svg');
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.navigation__link-movies{
-  font-weight: 500;
-  padding: 0 16px 0 0;
 }
 
 @media screen and (max-width: 400px) {

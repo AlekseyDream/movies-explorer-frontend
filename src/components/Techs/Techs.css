@@ -116,6 +116,12 @@
   }
 }
 
+@media screen and (max-width: 700px) {
+  .techs__block {
+    grid-template-columns: repeat(4, 12%);
+  }
+}
+
 @media screen and (max-width: 500px) {
   .techs__container {
     margin-top: 51px;

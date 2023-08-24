@@ -1,34 +1,38 @@
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
-import Profile from '../Profile/Profile';
-import Register from '../Register/Register';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import './App.css';
-import NotFound from '../NotFound/NotFound';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext.jsx';
+
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import Profile from '../Profile/Profile';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import NotFound from '../NotFound/NotFound';
+import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const logOut = () => {
-    setIsLoggedIn(false);
-    navigate('/signin', { replace: true });
-  };
 
   const logIn = (evt) => {
     evt.preventDefault();
     setIsLoggedIn(true);
-    navigate('/movies', { replace: true });
+    navigate('/movies');
   };
 
   const register = (evt) => {
     evt.preventDefault();
-    navigate('/signin', { replace: true });
+    navigate('/signin');
+  };
+
+  const logOut = () => {
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    navigate('/');
   };
 
   const isBurgerOpened = false;
@@ -42,51 +46,53 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      {headerPaths.includes(path) && (
-        <Header
-          logIn={logIn}
-          isLoggedIn={isLoggedIn}
-          isBurgerOpened={isBurgerOpened}
-        />
-      )}
-      <Routes>
-        <Route
-          path="/"
-          element={<Main />}
-        ></Route>
-        <Route
-          path="/movies"
-          element={<Movies isLoggedIn={isLoggedIn} />}
-        ></Route>
-        <Route
-          path="/saved-movies"
-          element={<SavedMovies isLoggedIn={isLoggedIn} />}
-        ></Route>
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              isLoggedIn={isLoggedIn}
-              onClick={logOut}
-            />
-          }
-        ></Route>
-        <Route
-          path="/signin"
-          element={<Login logIn={logIn} />}
-        ></Route>
-        <Route
-          path="/signup"
-          element={<Register register={register} />}
-        ></Route>
-        <Route
-          path="*"
-          element={<NotFound onBack={goBack} />}
-        />
-      </Routes>
-      {footerPaths.includes(path) && <Footer />}
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        {headerPaths.includes(path) && (
+          <Header
+            logIn={logIn}
+            isLoggedIn={isLoggedIn}
+            isBurgerOpened={isBurgerOpened}
+          />
+        )}
+        <Routes>
+          <Route
+            path="/"
+            element={<Main />}
+          ></Route>
+          <Route
+            path="/movies"
+            element={<Movies isLoggedIn={isLoggedIn} />}
+          ></Route>
+          <Route
+            path="/saved-movies"
+            element={<SavedMovies isLoggedIn={isLoggedIn} />}
+          ></Route>
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                isLoggedIn={isLoggedIn}
+                onClick={logOut}
+              />
+            }
+          ></Route>
+          <Route
+            path="/signin"
+            element={<Login logIn={logIn} />}
+          ></Route>
+          <Route
+            path="/signup"
+            element={<Register register={register} />}
+          ></Route>
+          <Route
+            path="*"
+            element={<NotFound onBack={goBack} />}
+          ></Route>
+        </Routes>
+        {footerPaths.includes(path) && <Footer />}
+      </div>
+    </CurrentUserContext.Provider>
   );
 };
 

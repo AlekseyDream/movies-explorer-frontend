@@ -18,7 +18,7 @@ const Login = ({ logIn }) => {
   }, [resetForm]);
 
   return (
-    <main className="login">
+    <section className="login">
       <form
         className="login__form"
         name="login"
@@ -67,6 +67,7 @@ const Login = ({ logIn }) => {
             <span className="login__error">{errors.password || ''}</span>
           </label>
         </div>
+        <div className="login__footer">
         <button
           type="submit"
           className={`login__button ${!isValid && 'login__button_disabled'}`}
@@ -84,8 +85,9 @@ const Login = ({ logIn }) => {
             Регистрация
           </Link>
         </span>
+        </div>
       </form>
-    </main>
+    </section>
   );
 };
 

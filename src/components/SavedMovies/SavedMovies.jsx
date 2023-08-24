@@ -4,10 +4,11 @@ import './SavedMovies.css';
 
 const SavedMovies = () => {
   return (
-    <main className="saved-movies">
+    <section className="saved-movies">
       <SearchForm />
       <MoviesCardList />
-    </main>
+      <div className="saved-movies__saveddevider" aria-label="Секция отделяющая карточки от Footer"></div>
+    </section>
   );
 };
 

@@ -24,7 +24,7 @@ const SearchForm = () => {
           required
         />
         <span className="search__error"></span>
-        <button className="search__button" type="submit">Найти</button>
+        <button className="search__button" type="button">Найти</button>
         </div>
         <FilterCheckbox />
       </form>

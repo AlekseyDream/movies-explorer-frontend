@@ -16,7 +16,8 @@ const MoviesCardList = () => {
           );
         })}
       </ul>
-      <button className="movies-cards__add-button">Ещё</button>
+      <button type="button" className="movies-cards__add-button">Ещё</button>
+      <div className="movies-cards__saveddevider" aria-label="Секция отделяющая карточки от Footer"></div>
     </section>
   );
 };
