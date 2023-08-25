@@ -72,7 +72,8 @@
 }
 
 .profile__input:focus {
-  outline: none;
+  color: #fff;
+  outline: 1px solid #44584a;
 }
 
 .profile__input_error {
@@ -111,7 +112,7 @@
 .profile__button-edit {
   margin-top: auto;
   border: none;
-  outline: 0;
+  outline: none;
   background-color: transparent;
   color: #fff;
   font-weight: 400;
@@ -153,7 +154,7 @@
   cursor: pointer;
 }
 
-.profile__button-exit:hover {
+.profile__link-exit:hover {
   opacity: 0.8;
 }
 

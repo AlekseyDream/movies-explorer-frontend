@@ -21,7 +21,7 @@ const App = () => {
   const logIn = (evt) => {
     evt.preventDefault();
     setIsLoggedIn(true);
-    navigate('/movies');
+    navigate('/signup');
   };
 
   const register = (evt) => {

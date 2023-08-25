@@ -48,8 +48,9 @@
   color: #959595;
 }
 
-.searchform__input-box:focus {
-  outline: none;
+.search__input-box:focus {
+  color: #fff;
+  outline: 1px solid #44584a;
 }
 
 .search__input-box::placeholder {

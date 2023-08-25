@@ -85,7 +85,8 @@
 }
 
 .register__input:focus {
-  outline: none;
+  color: #fff;
+  outline: 1px solid #44584a;
 }
 
 .register__input_error {

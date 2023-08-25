@@ -12,7 +12,7 @@ const BurgerMenu = () => {
   return (
     <nav
       className={`${
-        !isActiveBurger ? 'burger-navigation' : 'burger-navigation_type_active'
+        !isActiveBurger ? 'burger-navigation'  : 'burger-navigation_type_active burger-navigation_background'
       }`}
     >
       <div className="burger-btn__container">
