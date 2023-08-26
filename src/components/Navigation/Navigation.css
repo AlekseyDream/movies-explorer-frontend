@@ -116,10 +116,14 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-
+@media screen and (max-width: 770px) {
+  .navigation {
+    display: none;
+  }
+}
 @media screen and (max-width: 400px) {
   .navigation {
-    display: flex;
+    display: none;
     gap: 15px;
     align-items: center;
   }
