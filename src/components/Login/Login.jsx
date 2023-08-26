@@ -18,7 +18,7 @@ const Login = ({ logIn }) => {
   }, [resetForm]);
 
   return (
-    <section className="login">
+    <main className="login">
       <form
         className="login__form"
         name="login"
@@ -41,11 +41,11 @@ const Login = ({ logIn }) => {
             <span className="login__label-text">E-mail</span>
             <input
               name="email"
+              type="email"
               placeholder="Ваш email"
               className={`login__input ${errors.email && 'login__input_error'}`}
               onChange={handleChange}
               value={values.email || ''}
-              type="email"
               required
             />
             <span className="login__error">{errors.email || ''}</span>
@@ -54,6 +54,7 @@ const Login = ({ logIn }) => {
             <span className="login__label-text">Пароль</span>
             <input
               name="password"
+              type="password"
               placeholder="Ваш пароль"
               minLength="2"
               maxLength="30"
@@ -61,7 +62,6 @@ const Login = ({ logIn }) => {
                 }`}
               onChange={handleChange}
               value={values.password || ''}
-              type="password"
               required
             />
             <span className="login__error">{errors.password || ''}</span>
@@ -87,7 +87,7 @@ const Login = ({ logIn }) => {
         </span>
         </div>
       </form>
-    </section>
+    </main>
   );
 };
 

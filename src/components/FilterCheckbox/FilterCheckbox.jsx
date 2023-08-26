@@ -2,10 +2,13 @@ import './FilterCheckbox.css';
 
 const FilterCheckbox = () => {
   return (
-    <>
+    <form
+      className="Checkbox__form"
+      name="Checkbox"
+      noValidate>
       <label
         className="checkbox"
-        for="checkbox"
+        htmlFor="checkbox"
       >
         <input
           className="checkbox__input"
@@ -14,7 +17,7 @@ const FilterCheckbox = () => {
         />
         <span className="checkbox__inner">Короткометражки</span>
       </label>
-    </>
+    </form>
   );
 };
 

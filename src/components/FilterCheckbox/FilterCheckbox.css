@@ -11,6 +11,9 @@
   opacity: 0.8;
 }
 
+.Checkbox__form {
+  display: flex;
+}
 
 .checkbox__input {
   position: absolute;

@@ -51,7 +51,7 @@ const App = () => {
         {headerPaths.includes(path) && (
           <Header
             logIn={logIn}
-            isLoggedIn={isLoggedIn}
+            isLoggedIn={isLoggedIn} 
             isBurgerOpened={isBurgerOpened}
           />
         )}

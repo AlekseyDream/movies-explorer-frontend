@@ -7,7 +7,7 @@ function Profile({ logOut }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   return (
-    <section className="profile">
+    <main className="profile">
       <form
         className="profile__form"
         name="profile"
@@ -20,17 +20,17 @@ function Profile({ logOut }) {
             <span className="profile__label-text">Имя</span>
             <input
               name="name"
+              type="text"
               placeholder="Ваше имя"
               className={`profile__input ${
                 errors.name && 'profile__input_error'
               }`}
               onChange={handleChange}
               value={values.name || ''}
-              type="text"
-              required
               minLength="2"
               maxLength="30"
               pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
+              required
             />
             </div>
             <span className="profile__error-name">{errors.name || ''}</span>
@@ -40,13 +40,13 @@ function Profile({ logOut }) {
             <span className="profile__label-text">E-mail</span>
             <input
               name="email"
+              type="email"
               placeholder="Ваш email"
               className={`profile__input ${
                 errors.email && 'profile__input_error'
               }`}
               onChange={handleChange}
               value={values.email || ''}
-              type="email"
               required
             />
             </div>
@@ -68,7 +68,7 @@ function Profile({ logOut }) {
           </Link>
         </div>
       </form>
-    </section>
+    </main>
   );
 }
 

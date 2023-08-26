@@ -7,23 +7,17 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = ({ isLoggedIn, logIn }) => {
   const location = useLocation();
+  const isLanding = location.pathname === '/';
   const isMobile = useMediaQuery({ query: `(max-width: 770px)` });
 
   return (
     <header
-      className={`header header_theme_${location.pathname === '/' ? 'mazarine' : 'dark'
+      className={`header header_theme_${isLanding ? 'mazarine' : 'dark'
         }`}
     >
       <div className="header__container">
-        <Link
-          to="/"
-          className="header__link"
-        >
-          <img
-            className="header__logo"
-            src={Logo}
-            alt="Логотип"
-          />
+        <Link to="/" className="header__link">
+          <img className="header__logo" src={Logo} alt="Логотип"/>
         </Link>
         {isMobile ? (
           <BurgerMenu />

@@ -2,6 +2,17 @@
   width: 100%;
 }
 
+.about-me__title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  padding: 0 0 23px;
+  border-block-end: solid 1px;
+  margin: 0;
+}
+
+
 .about-me__container {
   max-width: 1280px;
   min-width: 320px;
@@ -106,6 +117,14 @@
 @media screen and (max-width: 460px) {
   .about-me__container {
     padding: 51px 15px 0;
+  }
+
+  .about-me__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding: 0 0 28px;
+    margin-bottom: 5px;
+    border-block-end: solid 1px #000000;
   }
 
   .about-me__info {

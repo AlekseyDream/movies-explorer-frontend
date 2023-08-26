@@ -4,8 +4,8 @@ const AboutProject = () => {
   return (
     <section className="about-project">
       <div className="about-project__container">
-        <h2 className="section-title">О проекте</h2>
-        <div className="about-project-info">
+        <h2 className="about-project__title">О проекте</h2>
+        <div className="about-project__info">
           <article className="two-columns">
             <h3 className="two-columns__main-text">
               Дипломный проект включал 5 этапов

@@ -5,7 +5,7 @@ const AboutMe = () => {
   return (
     <section className="about-me">
       <div className="about-me__container">
-        <h2 className="section-title">Студент</h2>
+        <h2 className="about-me__title">Студент</h2>
         <div className="about-me__info">
           <img
             className="about-me__image"

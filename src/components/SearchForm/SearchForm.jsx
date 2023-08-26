@@ -13,10 +13,10 @@ const SearchForm = () => {
       >
         <div className="search__input-block">
         <input
+        name="search"
+        type="text"
           className="search__input-box"
           aria-label="Форма поиска"
-          name="search"
-          type="text"
           placeholder="Фильм"
           autoComplete="off"
           value={values.search || ''}

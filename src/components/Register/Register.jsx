@@ -18,7 +18,7 @@ const Register = ({ register }) => {
   }, [resetForm]);
 
   return (
-    <section className="register">
+    <main className="register">
       <form
         className="register__form"
         name="register"
@@ -41,16 +41,16 @@ const Register = ({ register }) => {
             <span className="register__label-text">Имя</span>
             <input
               name="name"
+              type="text"
               placeholder="Ваше имя"
               className={`register__input ${errors.name && 'register__input_error'
                 }`}
               onChange={handleChange}
               value={values.name || ''}
-              type="text"
-              required
               minLength="2"
               maxLength="30"
               pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
+              required
             />
             <span className="register__error">{errors.name || ''}</span>
           </label>
@@ -58,12 +58,12 @@ const Register = ({ register }) => {
             <span className="register__label-text">E-mail</span>
             <input
               name="email"
+              type="email"
               placeholder="Ваш email"
               className={`register__input ${errors.email && 'register__input_error'
                 }`}
               onChange={handleChange}
               value={values.email || ''}
-              type="email"
               required
             />
             <span className="register__error">{errors.email || ''}</span>
@@ -72,6 +72,7 @@ const Register = ({ register }) => {
             <span className="register__label-text">Пароль</span>
             <input
               name="password"
+              type="password"
               placeholder="Ваш пароль"
               minLength="2"
               maxLength="30"
@@ -79,7 +80,6 @@ const Register = ({ register }) => {
                 }`}
               onChange={handleChange}
               value={values.password || ''}
-              type="password"
               required
             />
             <span className="register__error">{errors.password || ''}</span>
@@ -106,7 +106,7 @@ const Register = ({ register }) => {
           </div>
         </div>
       </form>
-    </section>
+    </main>
   );
 };
 

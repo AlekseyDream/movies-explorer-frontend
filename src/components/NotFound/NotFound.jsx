@@ -2,11 +2,11 @@ import './NotFound.css';
 
 const NotFound = ({ onBack }) => {
   return (
-    <section className="not-found">
-      <p className="not-found__text-container">
+    <main className="not-found">
+      <div className="not-found__text-container">
         <h1 className="not-found__error">404</h1>
         <span className="not-found__error-name">Страница не найдена</span>
-      </p>
+      </div>
       <button
         className="not-found__button"
         type="submit"
@@ -14,7 +14,7 @@ const NotFound = ({ onBack }) => {
       >
         Назад
       </button>
-    </section>
+    </main>
   );
 };
 

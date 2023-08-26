@@ -101,7 +101,7 @@
     z-index: 50;
   }
 
-  .burger-navigation_background::after {
+  .burger-navigation__background::after {
     content: '';
     display: block;
     position: fixed;
@@ -167,11 +167,11 @@
 @media screen and (max-width: 400px) {
   .burger-btn {
     position: absolute;
-    top: 11px;
-    right: 20px;
+    top: 19px;
+    right: 18px;
   }
 
-  .burger-navigation_background::after {
+  .burger-navigation__background::after {
     display: none;
   }
 
