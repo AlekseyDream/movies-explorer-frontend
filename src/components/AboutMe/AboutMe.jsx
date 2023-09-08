@@ -1,3 +1,4 @@
+import React from 'react';
 import './AboutMe.css';
 import avatar from '../../images/Avatar.jpg';
 

@@ -1,4 +1,4 @@
-const movieOptions = {
+const BASE_URL = {
     baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
     headers: {
       'Content-Type': 'application/json'
@@ -27,6 +27,6 @@ const movieOptions = {
     }
   }
   
-  const moviesApi = new MoviesApi(movieOptions);
+  const moviesApi = new MoviesApi(BASE_URL);
   
   export default moviesApi;

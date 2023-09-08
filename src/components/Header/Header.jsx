@@ -1,8 +1,9 @@
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import Logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
 import { useMediaQuery } from 'react-responsive';
-import { Link, useLocation } from 'react-router-dom';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = ({ isLoggedIn, logIn }) => {
