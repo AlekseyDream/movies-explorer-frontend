@@ -1,135 +1,125 @@
 .navigation {
   display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  list-style-type: none;
-}
-
-
-
-.navigation-container {
-  max-width: 676px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+  width: auto;
+  height: auto;
+  z-index: 2;
 }
 
 .navigation__link {
   text-decoration: none;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
   color: #fff;
+  transition: 0.2s ease-in;
+  text-align: right;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
 }
-
 
 .navigation__link:hover {
   opacity: 0.8;
 }
 
-.navigation__link-text {
-  list-style-type: none;
-}
-
-
-.navigation__links-login {
+.navigation__list {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  flex-direction: row;
+  gap: 20px;
   list-style-type: none;
-}
-
-.navigation__links-movies {
-  display: flex;
   align-items: center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  list-style-type: none;
 }
 
-.navigation__links-account {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  list-style-type: none;
-}
-
-.navigation__link_type_active {
-  padding: 8px 20px;
-  color: black;
-  border-radius: 3px;
-  background: #3ddc84;
-  transition: all 0.1s ease;
-  margin-left: 30px;
-}
-
-.navigation__link_type_active:hover {
-  transform: scale(1.05);
-  opacity: 0.7;
-}
-
-.navigation__link_type_film {
-  font-size: 13px;
-  line-height: 18px;
-  padding: 0 16px 0 44px;
-}
-
-.navigation__link_type_save-film {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18px;
-}
-
-.navigation__link_type_account {
+.navigation__profile {
+  text-align: left;
+  align-self: center;
   position: relative;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 12px;
-  padding-left: 11px;
-  padding-right: 37px;
-  min-height: 26px;
-  border-radius: 40px;
-}
-
-.navigation__link_type_account::after {
-  position: absolute;
-  content: '';
-  top: 0;
-  right: 3px;
-  width: 26px;
-  height: 100%;
-  border-radius: 50px;
-  background-color: #313131;
-  background-image: url('../../images/icon-main.svg');
+  padding: 6px 40px 6px 55px;
+  background-image: url("../../images/profile-logo.svg");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center right;
+  background-size: contain;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
 }
 
-@media screen and (max-width: 400px) {
+.navigation__link-home {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
   .navigation {
+    width: 520px;
     display: flex;
-    gap: 15px;
+    position: fixed;
+    right: -165%;
+    top: 0;
+    flex-direction: column;
     align-items: center;
+    height: 100vh;
+    background-color: #202020;
+    transition: right 0.3s ease-in-out;
+  }
+
+  .navigation_active {
+    right: 0;
+    transition: right 0.3s ease-in-out;
   }
 
   .navigation__link {
-    font-size: 10px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .navigation__link:active {
+    text-decoration: underline;
+  }
+
+  .navigation__list {
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 26px;
+    padding: 0;
+    padding-top: 162px;
+    height: 65%;
+  }
+
+  .navigation__profile {
+    padding: 7px 43px 7px 0;
+    font-size: 14px;
+    background-position: center right;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
     line-height: 16px;
   }
 
-  .navigation__link_type_active {
-    padding: 5px 12px;
+  .navigation__link-home {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .navigation {
+    width: 80%;
+  }
+
+}
+
+
+@media screen and (max-width: 320px) {
+  .navigation {
+    width: 320px;
+  }
+
+  .navigation__list {
+    padding-top: 143px;
+    height: 69%;
   }
 }

@@ -2,47 +2,82 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer'
+import * as MainApi from '../../utils/MainApi';
 import './SavedMovies.css';
-import { filterMovies, filterDuration } from '../../utils/MoviesFilter';
 
-const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
-  const [filteredMovies, setFilteredMovies] = useState(savedMovies);
-  const [isCheckboxActive, setIsCheckboxActive] = useState(false);
+const checkMovieDuration = (movieDuration, isShortsIncluded, shortsDurationCriteria = 40) => {
+  return (isShortsIncluded && (movieDuration <= shortsDurationCriteria)) || (!isShortsIncluded && (movieDuration > shortsDurationCriteria));
+}
+
+const filterMovieByQuerry = (movie, searchQuerry) => {
+  const lowerQuerry = searchQuerry.toLowerCase();
+  return movie.nameRU.toLowerCase().includes(lowerQuerry);
+}
+
+export const movieFilter = (movie, { querry, includeShorts }) => {
+  return (includeShorts && (movie.duration <= 40) && filterMovieByQuerry(movie, querry)) ||
+    (!includeShorts && filterMovieByQuerry(movie, querry));
+}
+
+function SavedMovies({ loggedIn }) {
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
+  const [parameters, setParameters] = useState({ querry: '', includeShorts: false });
+  const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  function onSearchMovies(query) {
-    setSearchQuery(query);
-  }
+  useEffect(() => {
+    setIsLoading(true);
+    MainApi.getSavedMovies()
+      .then(res => {
+        console.log(res);
+        setSavedMovies(res);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }, [setSavedMovies])
 
-  function handleShortMovies() {
-    setIsCheckboxActive(!isCheckboxActive);
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const { request, short } = e.target.elements;
+    console.log(request.value, short.checked);
+    const currentSearch = { querry: request.value, includeShorts: short.checked };
+    setParameters(currentSearch);
+    setIsNotFound(false);
   }
 
   useEffect(() => {
-    const moviesList = filterMovies(savedMovies, searchQuery);
-    setFilteredMovies(isCheckboxActive ? filterDuration(moviesList) : moviesList);
-  }, [savedMovies, isCheckboxActive, searchQuery]);
-
-  useEffect(() => {
-    if (filteredMovies.length === 0) {
+    const currentSearchedMovies = savedMovies.filter(movie => movieFilter(movie, parameters));
+    if (currentSearchedMovies.length === 0) {
       setIsNotFound(true);
     } else {
       setIsNotFound(false);
+      setSearchedSavedMovies(currentSearchedMovies);
     }
-  }, [filteredMovies]);
+    console.log('currentSearchedMovies: ', currentSearchedMovies);
+    setSearchedSavedMovies(currentSearchedMovies);
+  }, [parameters, savedMovies])
 
   return (
     <section className="saved-movies">
-      <SearchForm onSearch={onSearchMovies} onFilter={handleShortMovies} />
+      <Header loggedIn={loggedIn} theme={{ default: false }} />
+      <SearchForm parameters={parameters}
+        handleSearchSubmit={handleSearchSubmit}
+        setParameters={setParameters}
+      />
       <MoviesCardList
-        savedMovies={savedMovies}
+        moviesData={searchedSavedMovies}
+        isLoading={isLoading}
         isNotFound={isNotFound}
-        isSavedFilms={true}
-        filteredMovies={filteredMovies}
-        onDeleteMovie={onDeleteMovie}
       />
       <div className="saved-movies__saveddevider" aria-label="Секция отделяющая карточки от Footer"></div>
+      <Footer />
     </section>
   );
 };

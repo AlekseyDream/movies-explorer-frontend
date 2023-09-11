@@ -4,13 +4,15 @@ const useFormWithValidation = () => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [currentInputName, setCurrentInputName] = useState('');
 
-  const handleChange = (e) => {
-    const input = e.target;
+  const handleChange = ({ target }) => {
+    const input = target;
     const { value, name } = input;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: input.validationMessage });
     setIsValid(input.closest('form').checkValidity());
+    setCurrentInputName(name);
   };
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -21,7 +23,7 @@ const useFormWithValidation = () => {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, errors, isValid, handleChange, resetForm, setIsValid };
+  return { values, errors, isValid, handleChange, resetForm, setIsValid, currentInputName };
 };
 
 export default useFormWithValidation;

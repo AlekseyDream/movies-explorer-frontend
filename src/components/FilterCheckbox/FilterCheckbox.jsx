@@ -1,7 +1,7 @@
 import React from 'react';
 import './FilterCheckbox.css';
 
-const FilterCheckbox = ({ onFilter, isActive }) => {
+const FilterCheckbox = ({ checkHandler, isChecked }) => {
   return (
     <form
       className="Checkbox__form"
@@ -16,8 +16,8 @@ const FilterCheckbox = ({ onFilter, isActive }) => {
           type="checkbox"
           id="checkbox"
           value="true"
-          onChange={onFilter}
-          checked={isActive}
+          checked={isChecked}
+          onChange={checkHandler}
         />
         <span className="checkbox__inner">Короткометражки</span>
       </label>

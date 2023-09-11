@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import './NotFound.css';
 
-const NotFound = ({ onBack }) => {
+const NotFound = () => {
+  const navigate = useNavigate();
   return (
     <main className="not-found">
       <div className="not-found__text-container">
@@ -10,7 +12,7 @@ const NotFound = ({ onBack }) => {
       <button
         className="not-found__button"
         type="submit"
-        onClick={onBack}
+        onClick={() => navigate(-1)}
       >
         Назад
       </button>

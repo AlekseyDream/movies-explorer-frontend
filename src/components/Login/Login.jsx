@@ -1,94 +1,73 @@
+import React, { useEffect } from 'react';
+import Auth from '../Auth/Auth';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../images/logo.svg';
-import useFormWithValidation from '../../components/hooks/useFormWithValidation';
 
-const Login = ({ logIn }) => {
-  const { values, handleChange, resetForm, errors, isValid } =
-    useFormWithValidation();
+const Login =  ({ onAuthorize, isLoading, loggedIn }) => {
+  const { values, errors, handleChange, isValid } = useFormWithValidation();
+    const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    logIn(values);
-  }
+    function handleSubmit(e) {
+        e.preventDefault();
+        onAuthorize({
+            email: values.email,
+            password: values.password,
+        });
+    }
 
-  useEffect(() => {
-    resetForm();
-  }, [resetForm]);
+    useEffect(() => {
+        if (loggedIn) {
+            navigate('/movies');
+        }
+    }, [loggedIn]);
 
-  return (
-    <main className="login">
-      <form
-        className="login__form"
-        name="login"
-        noValidate
-        onSubmit={handleSubmit}
-      >
-        <Link
-          to="/"
-          className="login__link"
+    return(
+        <Auth
+            title={"Рады видеть!"}
+            buttonText={"Войти"}
+            question={"Еще не зарегестрированы?"}
+            linkText={" Регистрация"}
+            link={"/signup"}
+            onSubmit={handleSubmit}
+            isDisabled={!isValid}
+            isLoading={isLoading}
         >
-          <img
-            src={logo}
-            alt="Логотип"
-            className="login__logo"
-          />
-        </Link>
-        <h1 className="login__title">Рады видеть!</h1>
-        <div className="login__labels-container">
-          <label className="login__label">
-            <span className="login__label-text">E-mail</span>
-            <input
-              name="email"
-              type="email"
-              placeholder="Ваш email"
-              className={`login__input ${errors.email && 'login__input_error'}`}
-              onChange={handleChange}
-              value={values.email || ''}
-              required
-            />
-            <span className="login__error">{errors.email || ''}</span>
-          </label>
-          <label className="login__label">
-            <span className="login__label-text">Пароль</span>
-            <input
-              name="password"
-              type="password"
-              placeholder="Ваш пароль"
-              minLength="2"
-              maxLength="30"
-              className={`login__input ${errors.password && 'login__input_error'
-                }`}
-              onChange={handleChange}
-              value={values.password || ''}
-              required
-            />
-            <span className="login__error">{errors.password || ''}</span>
-          </label>
-        </div>
-        <div className="login__footer">
-        <button
-          type="submit"
-          className={`login__button ${!isValid && 'login__button_disabled'}`}
-          disabled={!isValid}
-          onClick={logIn}
-        >
-          Войти
-        </button>
-        <span className="login__support">
-          Ещё не зарегистрированы?&nbsp;
-          <Link
-            to="/signup"
-            className="login__link"
-          >
-            Регистрация
-          </Link>
-        </span>
-        </div>
-      </form>
-    </main>
-  );
-};
 
-export default Login;
+        <label className='auth__input-label'>
+            E-mail
+            <input
+                name='email'
+                className={`auth__input-row ${errors.email ? 'auth__input-row_error' : ''}`}
+                id='email-input'
+                type='email'
+                placeholder="Введите почту"
+                minLength="2"
+                maxLength="40"
+                required={true}
+                onChange={handleChange}
+                value={values.email || ''}
+                pattern="^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$"
+            />
+            <span className='auth-form__span-error'>{errors.email}</span>
+        </label>
+        <label className='auth__input-label'>
+            Пароль
+            <input
+                name='password'
+                className={`auth__input-row ${errors.password ? 'auth__input-row_error' : ''}`}
+                id='password-input'
+                type='password'
+                placeholder="Введите пароль"
+                minLength="6"
+                required
+                onChange={handleChange}
+                value={values.password || ''}
+            />
+            <span className='auth-form__span-error'>{errors.password}</span>
+        </label>
+        </Auth>
+    )
+}
+
+export default Login

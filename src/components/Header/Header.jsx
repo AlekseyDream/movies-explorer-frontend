@@ -1,36 +1,45 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Header.css';
-import Logo from '../../images/logo.svg';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
-import { useMediaQuery } from 'react-responsive';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import './Header.css';
 
-const Header = ({ isLoggedIn, logIn }) => {
-  const location = useLocation();
-  const isLanding = location.pathname === '/';
-  const isMobile = useMediaQuery({ query: `(max-width: 770px)` });
+function Header({ theme, loggedIn }) {
+  const [openNavPanel, setOpenNavPanel] = useState(false);
+
+  function handleOpenNavPanel() {
+    setOpenNavPanel(!openNavPanel);
+  }
+
+  const { pathname } = useLocation();
 
   return (
-    <header
-      className={`header header_theme_${isLanding ? 'mazarine' : 'dark'
-        }`}
-    >
-      <div className="header__container">
-        <Link to="/" className="header__link">
-          <img className="header__logo" src={Logo} alt="Логотип"/>
-        </Link>
-        {isMobile ? (
-          <BurgerMenu />
-        ) : (
-          <Navigation
-            isLoggedIn={isLoggedIn}
-            logIn={logIn}
-          />
-        )}
-      </div>
+    <header className={pathname === "/" ? "header header_type_promo" : "header"}>
+      <Link to="/" className="header__logo" />
+      {!theme.default && (loggedIn ?
+        <div>
+          <div className={`header__overlay ${openNavPanel ? 'header__overlay_active' : ''}`} />
+          <button
+            className="header__navpanel"
+            onClick={handleOpenNavPanel}>
+            <div className={`header__navpanel-inner ${openNavPanel ? 'header__navpanel-inner_active' : ''}`} />
+          </button>
+          <Navigation isOpenNavPanel={openNavPanel} />
+        </div>
+        :
+        <div className="header__main">
+          <Link to="/signup" className="header__signup">
+            Регистрация
+          </Link>
+          <Link to="/signin" className="header__signin">
+            Войти
+          </Link>
+        </div>
+      )
+      }
+
     </header>
-  );
-};
+  )
+}
 
 export default Header;

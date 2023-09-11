@@ -5,38 +5,38 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 
-const SearchForm = ({ onSearch, onFilter, isCheckboxActive }) => {
-  const currentLocation = useLocation().pathname;
-    const [searchValue, setSearchValue] = useState("");
-    const [isError, setIsError] = useState(false);
+const SearchForm = ({ parameters, setParameters, handleSearchSubmit }) => {
+  const [searchValue, setSearchValue] = useState(parameters.querry);
+  const [isShortChecked, setShortChecked] = useState(parameters.includeShorts);
+  const [prevSearchResults, setPrevSearchResults] = useState([]);
 
-    useEffect(() => {
-        if (currentLocation === '/movies' && localStorage.getItem('movieSearch')) {
-            setSearchValue(localStorage.getItem('movieSearch'));
-        }
-    }, [currentLocation]);
+  const {pathname} = useLocation();
 
-
-    function changeSearch(e) {
-        setSearchValue(e.target.value);
+  const handleChange = ({ target }) => {
+    setSearchValue(target.value);
+  }
+  
+  useEffect(() => {
+    setSearchValue(parameters.querry);
+    setShortChecked(parameters.includeShorts);
+    if (pathname === '/movies' && parameters.querry !== '') {
+        localStorage.setItem('search', JSON.stringify(parameters));
+        console.log(localStorage.getItem('search'));
     }
+  }, [parameters, pathname])
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        if (searchValue.trim().length === 0) {
-            setIsError(true);
-        } else {
-            setIsError(false);
-            onSearch(searchValue);
-        }
-    }
+
+  const handleShortsCheck = () => {
+    setShortChecked(!isShortChecked);
+    setParameters({ ...parameters, includeShorts: !parameters.includeShorts });
+  }
 
   return (
     <section className="search-container" aria-label="Форма поиска">
       <form
         className="search__form"
         name="search"
-        onSubmit={handleSubmit}
+        onSubmit={handleSearchSubmit}
         noValidate
       >
         <div className="search__input-block">
@@ -48,13 +48,13 @@ const SearchForm = ({ onSearch, onFilter, isCheckboxActive }) => {
             placeholder="Фильм"
             autoComplete="off"
             value={searchValue || ""}
-            onChange={changeSearch}
+            onChange={handleChange}
             required
           />
           <span className="search__error"></span>
-          <button className="search__button" type="button">Найти</button>
+          <button className="search__button" type="submit">Найти</button>
         </div>
-        <FilterCheckbox onFilter={onFilter} isActive={isCheckboxActive}/>
+        <FilterCheckbox checkHandler={handleShortsCheck} isChecked={isShortChecked}/>
       </form>
     </section>
   );

@@ -1,0 +1,206 @@
+.auth {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .auth__logo {
+    margin: 18px 0;
+    width: 38px;
+    height: 38px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .auth__title {
+    margin: 0 auto;
+    padding-bottom: 40px;
+    padding-top: 37px;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .auth__forma {
+    width: 396px;
+    margin: 0 auto;
+    padding-top: 88px;
+  }
+  
+  .auth__form {
+    margin: 0;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  
+  .auth__input {
+    color: #fff;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border: none;
+    width: 100%;
+    background-color: inherit;
+    border-bottom: solid 1px #424242;
+    outline: none;
+    padding: 0;
+    padding-top: 7px;
+  }
+  
+  .auth__input-row {
+    color: #fff;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border: none;
+    width: 100%;
+    background-color: inherit;
+    border-bottom: solid 1px #424242;
+    outline: none;
+    padding: 0;
+    padding-top: 12px;
+  }
+  
+  .auth__input-row_error {
+    color: red;
+  }
+  
+  .auth__input-row_error:focus {
+    outline: 1px solid red;
+  }
+  
+  .auth-form__span-error {
+    margin: 10px 0 0 0;
+    padding: 0;
+    font-size: 10px;
+    line-height: 12px;
+    color: var(--color-pink);
+  }
+  
+  .auth__input-label {
+    padding-bottom: 5px;
+    color: #8b8b8b;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .auth__submit-button {
+    margin-top: 124px;
+    padding: 0;
+    height: 45px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: #4285f4;
+    border-radius: 3px;
+    border: 0;
+    opacity: 1;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+  }
+  
+  .auth__submit-button:hover {
+    opacity: 0.3;
+  }
+  
+  .auth__submit-button:disabled {
+    background-color: gray;
+    cursor: default;
+  }
+  
+  .auth__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 16px;
+  }
+  
+  .auth__text {
+    padding-top: 15px;
+    margin: 0;
+    color: #8b8b8b;
+    text-align: center;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-right: 5px;
+  }
+  
+  .auth__link {
+    text-decoration: none;
+    color: #4285f4;
+    text-align: center;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .auth__title {
+      padding-top: 38px;
+    }
+  }
+  
+  @media screen and (max-width: 440px) {
+    .auth__title {
+      padding-top: 50px;
+      margin: 0 auto;
+      padding-bottom: 80px;
+      text-align: center;
+    }
+  
+    .auth__submit-button {
+      margin-top: 212px;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  
+    .auth__text {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  
+    .auth__link {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  
+    .auth__logo {
+      margin: 18px 110px;
+    }
+  
+    .auth__forma {
+      width: 260px;
+    }
+  }
