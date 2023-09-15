@@ -53,7 +53,6 @@ function MoviesCard({ movieData }) {
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const { savedMovies, setSavedMovies } = useSavedMoviesContext();
   const [isDeleted, setIsDeleted] = useState(false);
-
   const moviesUrl = 'https://api.nomoreparties.co/';
 
   useEffect(() => {
