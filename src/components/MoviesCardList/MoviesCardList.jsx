@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
-import MoviesCard from '../MoviesCard/MoviesCard'
-import Preloader from '../Preloader/Preloader';
-import SearchError from '../SearchErr/SearchErr';
+import MoviesCard from '../MoviesCard/MoviesCard.jsx'
+import Preloader from '../Preloader/Preloader.jsx';
+import SearchError from '../SearchErr/SearchErr.jsx';
 import './MoviesCardList.css';
 
 function MoviesCardList({ moviesData, isLoading, isNotFound }) {

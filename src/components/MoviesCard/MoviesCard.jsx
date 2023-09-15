@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
-import { convertMinutes } from '../../utils/СonvertMinutes';
+import { convertMinutes } from '../../utils/СonvertMinutes.js';
 import { useEffect, useState } from 'react';
-import { useSavedMoviesContext } from '../../context/SavedMovieContextProvider';
-import api from '../../utils/MainApi';
+import { useSavedMoviesContext } from '../../context/SavedMovieContextProvider.js';
+import api from '../../utils/MainApi.js';
 import './MoviesCard.css';
 
 const checkMovieDuration = (movieDuration, isShortsIncluded, shortsDurationCriteria = 40) => {

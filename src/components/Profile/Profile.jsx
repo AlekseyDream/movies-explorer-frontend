@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
-import useFormWithValidation from '../../hooks/useFormWithValidation';
-import Header from '../Header/Header'
+import { CurrentUserContext } from '../../context/CurrentUserContext.js';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
+import Header from '../Header/Header.jsx';
 import './Profile.css';
 
 function Profile({ logOut, onUpdateInfo, loggedIn, isLoading }) {

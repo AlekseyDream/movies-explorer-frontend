@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useSavedMoviesContext } from '../../context/SavedMovieContextProvider';
-import Search from '../Search/Search';
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import api from '../../utils/MainApi';
-import moviesApi from '../../utils/MoviesApi';
+import { useSavedMoviesContext } from '../../context/SavedMovieContextProvider.js';
+import Search from '../Search/Search.jsx';
+import Header from '../Header/Header.jsx';
+import Footer from '../Footer/Footer.jsx';
+import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
+import api from '../../utils/MainApi.js';
+import moviesApi from '../../utils/MoviesApi.js';
 import './Movies.css'
 
 const checkMovieDuration = (movieDuration, isShortsIncluded, shortsDurationCriteria = 40) => {

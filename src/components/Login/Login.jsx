@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import Auth from '../Auth/Auth';
-import useFormWithValidation from '../../hooks/useFormWithValidation';
+import Auth from '../Auth/Auth.jsx';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 

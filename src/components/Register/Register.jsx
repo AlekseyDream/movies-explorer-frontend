@@ -1,6 +1,6 @@
 import React from 'react';
-import Auth from '../Auth/Auth';
-import useFormWithValidation from '../../hooks/useFormWithValidation';
+import Auth from '../Auth/Auth.jsx';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
 import './Register.css';
 
 const Register = ({ onRegister, isLoading }) => {

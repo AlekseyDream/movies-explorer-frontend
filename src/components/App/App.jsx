@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { SavedMoviesContextProvider } from '../../context/SavedMovieContextProvider';
-import ProtectedRoute from '../../hooks/ProtectedRoute';
-import Header from '../Header/Header';
-import Main from "../Pages/Main/Main"
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile'
-import NotFound from '../NotFound/NotFound';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
-import api from '../../utils/MainApi';
-import InfoTooltip from '../InfoToolTip/InfoToolTip';
+import { CurrentUserContext } from '../../context/CurrentUserContext.js';
+import { SavedMoviesContextProvider } from '../../context/SavedMovieContextProvider.js';
+import ProtectedRoute from '../../hooks/ProtectedRoute.jsx';
+import Header from '../Header/Header.jsx';
+import Main from "../Pages/Main/Main.jsx"
+import Movies from '../Movies/Movies.jsx';
+import SavedMovies from '../SavedMovies/SavedMovies.jsx';
+import Profile from '../Profile/Profile.jsx'
+import NotFound from '../NotFound/NotFound.jsx';
+import Login from '../Login/Login.jsx';
+import Register from '../Register/Register.jsx';
+import api from '../../utils/MainApi.js';
+import InfoTooltip from '../InfoToolTip/InfoToolTip.jsx';
 import './App.css';
 
 function App() {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../Navigation/Navigation.jsx';
 import './Header.css';
 
 function Header({ theme, loggedIn }) {

@@ -1,9 +1,9 @@
-import Header from '../Header/Header';
-import Search from '../Search/Search';
-import Footer from '../Footer/Footer';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Header from '../Header/Header.jsx';
+import Search from '../Search/Search.jsx';
+import Footer from '../Footer/Footer.jsx';
+import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
 import { useEffect, useState } from 'react';
-import api from '../../utils/MainApi';
+import api from '../../utils/MainApi.js';
 import './SavedMovies.css';
 
 const checkMovieDuration = (movieDuration, isShortsIncluded, shortsDurationCriteria = 40) => {

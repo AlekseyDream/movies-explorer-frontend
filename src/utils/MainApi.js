@@ -1,5 +1,6 @@
 const apiOptions = {
   baseUrl: 'https://api.dream.movie.nomoreparties.co',
+
   headers: {
     'Content-Type': 'application/json'
   }
