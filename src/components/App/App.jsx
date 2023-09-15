@@ -1,99 +1,199 @@
-import { useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import CurrentUserContext from '../../contexts/CurrentUserContext.jsx';
-
-import Header from '../Header/Header';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
-import Profile from '../Profile/Profile';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import NotFound from '../NotFound/NotFound';
+import { useState, useEffect } from 'react';
+import { Navigate, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { CurrentUserContext } from '../../context/CurrentUserContext.js';
+import { SavedMoviesContextProvider } from '../../context/SavedMovieContextProvider.js';
+import ProtectedRoute from '../../hooks/ProtectedRoute.jsx';
+import Header from '../Header/Header.jsx';
+import Main from "../Pages/Main/Main.jsx"
+import Movies from '../Movies/Movies.jsx';
+import SavedMovies from '../SavedMovies/SavedMovies.jsx';
+import Profile from '../Profile/Profile.jsx'
+import NotFound from '../NotFound/NotFound.jsx';
+import Login from '../Login/Login.jsx';
+import Register from '../Register/Register.jsx';
+import api from '../../utils/MainApi.js';
+import InfoTooltip from '../InfoToolTip/InfoToolTip.jsx';
 import './App.css';
 
-const App = () => {
+function App() {
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
+  const path = location.pathname;
+  const navigation = useNavigate();
+  const [loggedIn, setloggedIn] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(true);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
-  const logIn = (evt) => {
-    evt.preventDefault();
-    setIsLoggedIn(true);
-    navigate('/signup');
+  useEffect(() => {
+    const jwt = localStorage.getItem('token');
+
+    if (jwt) {
+      api
+        .getContent(jwt)
+        .then((res) => {
+          if (res) {
+            localStorage.removeItem('allMovies');
+            setloggedIn(true);
+          }
+          navigation(path);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+  }, []);
+
+  function handleLogin({ email, password }) {
+    setIsLoading(true)
+    api
+      .authorize(email, password)
+      .then((res) => {
+        if (res) {
+          setloggedIn(true);
+          localStorage.setItem('token', res.token);
+          navigation('/movies');
+        }
+      })
+      .catch((err) => {
+        setIsSuccess(false);
+        console.log(err)
+      })
+    .finally(() => {
+        setIsLoading(false);
+    })
+  }
+
+  function handleRegister({ name, email, password }) {
+    api.register(name, email, password)
+      .then(() => {
+        handleLogin({ email, password });
+      })
+      .catch((err) => {
+        setIsSuccess(false);
+        console.log(err);
+      })
+  }
+
+  function handleUnauthorized(err) {
+    if (err === 'Error: 401') {
+      handleLogout();
+    }
+  }
+
+  useEffect(() => {
+    if (loggedIn) {
+      api.getUserData()
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn])
+
+  function handleUpdateInfo(newUserInfo) {
+    setIsLoading(true);
+    api
+      .editUserData(newUserInfo)
+      .then((data) => {
+        setIsUpdate(true);
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        setIsSuccess(false);
+        console.log(err);
+        handleUnauthorized(err);
+      })
+    .finally(() => {
+      setIsLoading(false);
+    });
+  }
+
+  const handleLogout = () => {
+    setloggedIn(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('search');
+    localStorage.removeItem('prevSearchResults')
+    navigation('/');
   };
 
-  const register = (evt) => {
-    evt.preventDefault();
-    navigate('/signin');
-  };
-
-  const logOut = () => {
-    setIsLoggedIn(false);
-    setCurrentUser({});
-    navigate('/');
-  };
-
-  const isBurgerOpened = false;
-
-  const path = useLocation().pathname;
-  const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
-  const footerPaths = ['/', '/movies', '/saved-movies'];
-
-  const goBack = () => {
-    navigate(-1);
-  };
+  function closePopup() {
+    setIsSuccess(true);
+    setIsUpdate(false);
+}
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="app">
-        {headerPaths.includes(path) && (
-          <Header
-            logIn={logIn}
-            isLoggedIn={isLoggedIn} 
-            isBurgerOpened={isBurgerOpened}
-          />
-        )}
+      <SavedMoviesContextProvider value={savedMovies}
+        context={{ savedMovies, setSavedMovies }}
+      >
         <Routes>
           <Route
-            path="/"
-            element={<Main />}
-          ></Route>
+            element={(<>
+              <Header theme={{ default: false }} loggedIn={loggedIn} />
+              <Main />
+            </>)}
+            path='/'
+            loggedIn={loggedIn}
+          />
           <Route
-            path="/movies"
-            element={<Movies isLoggedIn={isLoggedIn} />}
-          ></Route>
-          <Route
-            path="/saved-movies"
-            element={<SavedMovies isLoggedIn={isLoggedIn} />}
-          ></Route>
-          <Route
-            path="/profile"
+            path='/movies'
             element={
-              <Profile
-                isLoggedIn={isLoggedIn}
-                onClick={logOut}
-              />
-            }
-          ></Route>
+              <ProtectedRoute
+                element={Movies}
+                loggedIn={loggedIn} />
+            } />
           <Route
-            path="/signin"
-            element={<Login logIn={logIn} />}
-          ></Route>
+            path='/saved-movies'
+            element={
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn} />
+            }  />
           <Route
-            path="/signup"
-            element={<Register register={register} />}
-          ></Route>
+            path='/signin'
+            element={!loggedIn
+              ?
+              <Login onAuthorize={handleLogin} isLoading={isLoading}/>
+              :
+              <Navigate to='/movies' />
+            } />
           <Route
-            path="*"
-            element={<NotFound onBack={goBack} />}
-          ></Route>
+            path='/signup'
+            element={!loggedIn
+              ?
+              <Register onRegister={handleRegister} isLoading={isLoading}/>
+              :
+              <Navigate to='/movies' />
+            }  />
+          <Route
+            path='/profile'
+            element={(
+              <ProtectedRoute
+                element={Profile}
+                logOut={handleLogout}
+                onUpdateInfo={handleUpdateInfo}
+                loggedIn={loggedIn}
+                isLoading={isLoading} >
+              </ProtectedRoute>
+            )} />
+
+          <Route path="*" element={<Navigate to="/NotFound" replace />} />
+          <Route path="/NotFound" element={<NotFound />} />
         </Routes>
-        {footerPaths.includes(path) && <Footer />}
-      </div>
+
+        <InfoTooltip isSuccess={isSuccess} onClose={closePopup} />
+        <InfoTooltip isSuccess={!isUpdate} isUpdate={isUpdate} onClose={closePopup} />
+
+      </SavedMoviesContextProvider>
     </CurrentUserContext.Provider>
   );
-};
+}
 
 export default App;

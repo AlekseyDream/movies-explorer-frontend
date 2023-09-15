@@ -1,38 +1,24 @@
 import './Footer.css';
 
-const Footer = () => {
+function Footer() {
   return (
     <footer className="footer">
-      <div className="footer__container">
-        <h3 className="footer__title">
-          Учебный проект Яндекс.Практикум х BeatFilm.
-        </h3>
-        <div className="footer__info">
-          <p className="footer__info-data">© {new Date().getFullYear()}</p>
-          <ul className="footer__links">
-          <li className="footer__link">
-            <a className="footer__link-text"
-              href="https://practicum.yandex.ru/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Яндекс.Практикум
-            </a>
-            </li>
-            <li className="footer__link">
-            <a className="footer__link-text"
-              href="https://github.com/AlekseyDream/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Github
-            </a>
-            </li>
-          </ul>
-        </div>
+      <div className="footer__start">
+        <p className="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+      </div>
+      <div className="footer__end">
+        <p className="footer__copyright">© 2023</p>
+        <ul className="footer__list">
+          <li className="footer__item">
+            <a href="https://practicum.yandex.ru/" className="footer__link" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
+          </li>
+          <li className="footer__item">
+            <a href="https://github.com/AlekseyDream" className="footer__link" target="_blank" rel="noreferrer">Github</a>
+          </li>
+        </ul>
       </div>
     </footer>
-  );
-};
+  )
+}
 
 export default Footer;

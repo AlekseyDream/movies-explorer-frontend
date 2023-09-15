@@ -1,75 +1,101 @@
+import { useContext, useEffect, useState } from 'react';
+import { CurrentUserContext } from '../../context/CurrentUserContext.js';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
+import Header from '../Header/Header.jsx';
 import './Profile.css';
-import React from "react";
-import { Link } from 'react-router-dom';
-import useFormWithValidation from '../../components/hooks/useFormWithValidation';
 
-function Profile({ logOut }) {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+function Profile({ logOut, onUpdateInfo, loggedIn, isLoading }) {
+  const currentUser = useContext(CurrentUserContext);
+  const { values, errors, handleChange, isValid, resetForm } = useFormWithValidation();
+  const [isLastEnter, setIsLastEnter] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUpdateInfo({
+        name: values.name,
+        email: values.email,
+    });
+}
+
+useEffect(() => {
+  if (currentUser) {
+      resetForm(currentUser);
+  }
+}, [currentUser, resetForm]);
+
+useEffect(() => {
+  if (currentUser.name === values.name && currentUser.email === values.email) {
+    setIsLastEnter(true);
+  } else {
+    setIsLastEnter(false);
+  }
+}, [values]);
 
   return (
-    <main className="profile">
-      <form
-        className="profile__form"
-        name="profile"
-        noValidate
-      >
-        <h1 className="profile__title">Привет, Алексей!</h1>
-        <div className="profile__labels-container">
-          <label className="profile__label">
-          <div className="profile__input-block">
-            <span className="profile__label-text">Имя</span>
+    <div className="">
+      <Header loggedIn={loggedIn} theme={{ default: false }} />
+      <main className="profile">
+        <h2 className="profile__title">
+          {`Привет, ${currentUser.name}!`}
+        </h2>
+
+        <form name="profile__form"
+          className="profile__form"
+          onSubmit={handleSubmit}>
+          <label className="profile__input-container">
+            <span className="profile__input-label">
+              Имя
+            </span>
             <input
               name="name"
               type="text"
-              placeholder="Ваше имя"
-              className={`profile__input ${
-                errors.name && 'profile__input_error'
-              }`}
-              onChange={handleChange}
+              className="profile__input"
+              placeholder="Имя"
               value={values.name || ''}
-              minLength="2"
-              maxLength="30"
-              pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
-              required
-            />
-            </div>
-            <span className="profile__error-name">{errors.name || ''}</span>
-          </label>
-          <label className="profile__label">
-          <div className="profile__input-block">
-            <span className="profile__label-text">E-mail</span>
-            <input
-              name="email"
-              type="email"
-              placeholder="Ваш email"
-              className={`profile__input ${
-                errors.email && 'profile__input_error'
-              }`}
               onChange={handleChange}
-              value={values.email || ''}
-              required
-            />
-            </div>
-            <span className="profile__error">{errors.email || ''}</span>
+              minLength={2}
+              maxLength={30}
+              required={true} />
           </label>
-        </div>
-        <div className="profile__button-container">
+          <span className="auth-form__span-error">{errors.name}</span>
+          <label className="profile__input-container">
+            <span className="profile__input-label">
+              E-mail
+            </span>
+            <input
+              required
+              type="email"
+              name="email"
+              pattern="^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$"
+              className="profile__input"
+              placeholder="почтa"
+              value={values.email || ''}
+              onChange={handleChange}
+            />
+          </label>
+          <span className="auth-form__span-error">{errors.email}</span>
+        <div className="profile__edit">
           <button
-            type="submit"
-            className={`profile__button-edit ${
-              !isValid && 'profile__button-edit_disabled'
-            }`}
-            disabled={!isValid ? true : false}
-          >
+          onClick={handleSubmit}
+            type="button"
+            form="profile__form"
+            disabled={!isValid  || isLastEnter || isLoading}
+            className={!isValid  || isLastEnter || isLoading
+              ?'profile__button-edit profile__button-edit_inactive'
+              :'profile__button-edit' }>
             Редактировать
           </button>
-          <Link  to="/signin" className="profile__link-exit" onClick={logOut}>
+          <button
+            className="profile__button-logout"
+            type="button"
+            onClick={logOut}>
             Выйти из аккаунта
-          </Link>
+          </button>
         </div>
-      </form>
-    </main>
-  );
-}
+        </form>
+      </main>
+    </div>
+  )
+};
 
 export default Profile;

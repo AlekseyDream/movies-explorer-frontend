@@ -1,25 +1,29 @@
+import { useLocation } from 'react-router-dom';
+import MoviesCard from '../MoviesCard/MoviesCard.jsx'
+import Preloader from '../Preloader/Preloader.jsx';
+import SearchError from '../SearchErr/SearchErr.jsx';
 import './MoviesCardList.css';
-import MoviesCard from '../MoviesCard/MoviesCard.jsx';
-import films from '../../utils/films';
 
-const MoviesCardList = () => {
+function MoviesCardList({ moviesData, isLoading, isNotFound }) {
+  const { pathname } = useLocation();
+
   return (
-    <section className="movies-cards">
+    <main className="movies-cards" aria-label="Карточки фильмов">
+      {isLoading && <Preloader />}
+      {isNotFound && !isLoading && <SearchError errorText={'Ничего не найдено'} />}
       <ul className="movies-cards__list">
-        {films.map((films, index) => {
-          return (
-            <MoviesCard
-              key={index}
-              image={films.image}
-              name={films.nameRU}
-            />
-          );
-        })}
+        {
+          moviesData.map((movie) => (
+            <MoviesCard key={
+              pathname === "/movies"
+                ? movie.id
+                : movie._id
+            } movieData={movie} />
+          ))
+        }
       </ul>
-      <button type="button" className="movies-cards__add-button">Ещё</button>
-      <div className="movies-cards__saveddevider" aria-label="Секция отделяющая карточки от Footer"></div>
-    </section>
-  );
+    </main>
+  )
 };
 
 export default MoviesCardList;

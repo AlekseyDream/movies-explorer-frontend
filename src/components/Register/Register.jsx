@@ -1,113 +1,69 @@
+import React from 'react';
+import Auth from '../Auth/Auth.jsx';
+import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
 import './Register.css';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import useFormWithValidation from '../../components/hooks/useFormWithValidation';
-import logo from '../../images/logo.svg';
 
-const Register = ({ register }) => {
-  const { values, handleChange, resetForm, errors, isValid } =
-    useFormWithValidation();
+const Register = ({ onRegister, isLoading }) => {
+  const { values, errors, handleChange, isValid } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    register(values);
+    onRegister({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
   }
-
-  useEffect(() => {
-    resetForm();
-  }, [resetForm]);
-
   return (
-    <main className="register">
-      <form
-        className="register__form"
-        name="register"
-        noValidate
-        onSubmit={handleSubmit}
-      >
-        <Link
-          to="/"
-          className="register__link"
-        >
-          <img
-            src={logo}
-            alt="Логотип"
-            className="register__logo"
-          />
-        </Link>
-        <h1 className="register__title">Добро пожаловать!</h1>
-        <div className="register__labels-container">
-          <label className="register__label">
-            <span className="register__label-text">Имя</span>
-            <input
-              name="name"
-              type="text"
-              placeholder="Ваше имя"
-              className={`register__input ${errors.name && 'register__input_error'
-                }`}
-              onChange={handleChange}
-              value={values.name || ''}
-              minLength="2"
-              maxLength="30"
-              pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
-              required
-            />
-            <span className="register__error">{errors.name || ''}</span>
-          </label>
-          <label className="register__label">
-            <span className="register__label-text">E-mail</span>
-            <input
-              name="email"
-              type="email"
-              placeholder="Ваш email"
-              className={`register__input ${errors.email && 'register__input_error'
-                }`}
-              onChange={handleChange}
-              value={values.email || ''}
-              required
-            />
-            <span className="register__error">{errors.email || ''}</span>
-          </label>
-          <label className="register__label">
-            <span className="register__label-text">Пароль</span>
-            <input
-              name="password"
-              type="password"
-              placeholder="Ваш пароль"
-              minLength="2"
-              maxLength="30"
-              className={`register__input ${errors.password && 'register__input_error'
-                }`}
-              onChange={handleChange}
-              value={values.password || ''}
-              required
-            />
-            <span className="register__error">{errors.password || ''}</span>
-          </label>
-          <div className="register__footer">
-          <button
-            type="submit"
-            className={`register__button ${!isValid && 'register__button_disabled'
-              }`}
-            disabled={!isValid}
-          >
-            Зарегистрироваться
-          </button>
-          <span className="register__support">
-            Уже зарегистрированы?&nbsp;
-            <Link
-              to="/signin"
-              className="register__link"
-              onClick={register}
-            >
-              Войти
-            </Link>
-          </span>
-          </div>
-        </div>
-      </form>
-    </main>
+    <Auth
+      title='Добро пожаловать!'
+      buttonText='Зарегистрироваться'
+      question='Уже зарегистрированы?'
+      linkText=' Войти'
+      link={'/signin'}
+      onSubmit={handleSubmit}
+      isDisabled={!isValid}
+      isLoading={isLoading}>
+      <label className='auth__input-label'>
+        Имя
+        <input
+          name="name"
+          className={`auth__input-row ${errors.name ? 'auth__input-row_error' : ''}`}
+          id="name-input"
+          type="text"
+          minLength="2"
+          maxLength="40"
+          required
+          onChange={handleChange}
+          value={values.name || ''}  />
+        <span className='auth-form__span-error'>{errors.name}</span>
+      </label>
+      <label className='auth__input-label'>
+        E-mail
+        <input name="email"
+          className={`auth__input-row ${errors.email ? 'auth__input-row_error' : ''}`}
+          id="email-input"
+          type="email"
+          required
+          onChange={handleChange}
+          pattern="^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$"
+          value={values.email || ''} />
+        <span className='auth-form__span-error'>{errors.email}</span>
+      </label>
+      <label className='auth__input-label'>
+        Пароль
+        <input name="password"
+          className={`auth__input-row ${errors.password ? 'auth__input-row_error' : ''}`}
+          id="password-input"
+          type="password"
+          minLength="6"
+          required
+          onChange={handleChange}
+          value={values.password || ''}/>
+        <span className='auth-form__span-error'>{errors.password}</span>
+      </label>
+    </Auth>
   );
-};
+}
 
-export default Register;
+export default Register

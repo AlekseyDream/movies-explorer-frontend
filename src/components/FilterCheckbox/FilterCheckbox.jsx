@@ -1,24 +1,22 @@
-import './FilterCheckbox.css';
+import './FilterCheckbox.css'
 
-const FilterCheckbox = () => {
+function SearchShort({checkHandler, isChecked}) {
   return (
-    <form
-      className="Checkbox__form"
-      name="Checkbox"
-      noValidate>
-      <label
-        className="checkbox"
-        htmlFor="checkbox"
-      >
-        <input
-          className="checkbox__input"
-          type="checkbox"
-          id="checkbox"
-        />
-        <span className="checkbox__inner">Короткометражки</span>
-      </label>
-    </form>
-  );
-};
+    <label className="search__checkbox">
+    <input
+      type="checkbox" name="short" id="search-short-toggle"
+      className="search__label"
+      checked={isChecked}
+      onChange={checkHandler}
+       />
+    <label
+      className="search__checkbox-label"
+      htmlFor="search-short-toggle" />
+    <p className="search__text">
+      Короткометражки
+    </p>
+  </label>
+  )
+}
 
-export default FilterCheckbox;
+export default SearchShort;

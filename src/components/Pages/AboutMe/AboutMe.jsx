@@ -1,5 +1,6 @@
+import React from 'react';
 import './AboutMe.css';
-import avatar from '../../images/Avatar.jpg';
+import avatar from '../../../images/Avatar.jpg';
 
 const AboutMe = () => {
   return (

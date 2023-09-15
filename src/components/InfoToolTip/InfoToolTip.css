@@ -1,0 +1,39 @@
+.popup {
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  position: fixed;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.3);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup__container {
+  position: relative;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 36px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.info-tooltip__text {
+  color: black;
+}

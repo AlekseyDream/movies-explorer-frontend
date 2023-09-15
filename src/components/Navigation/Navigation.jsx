@@ -1,66 +1,37 @@
 import { Link } from 'react-router-dom';
-
 import './Navigation.css';
 
-const Navigation = ({ isLoggedIn, logIn }) => {
+function Navigation({ isOpenNavPanel }) {
   return (
-    <>
-      {!isLoggedIn ? (
-        <nav className="navigation">
-          <ul className="navigation navigation__links-login">
-            <li className="navigation__link-text">
-            <Link
-            to="/signup"
-            className="navigation__link"
-          >
-            Регистрация
-          </Link>
-            </li>
-            <li className="navigation__link-text">
-            <Link
-            to="/signin"
-            className="navigation__link navigation__link_type_active"
-            onClick={logIn}
-          >
-            Войти
-          </Link>
-            </li>
-          </ul>
-        </nav>
-      ) : (
-        <nav className="navigation">
-          <ul className="navigation__links-movies">
-            <li className="navigation__link-text">
-            <Link
-              to="/movies"
-              className="navigation__link navigation__link_type_film"
-            >
+    <div className={`navigation ${isOpenNavPanel ? 'navigation_active' : ''}`}>
+      <nav className='navigation__list'>
+        <ul className='navigation__list-movies'>
+          <li className='navigation__item'>
+            <Link to='/' className='navigation__link navigation__link-home'>
+              Главная
+            </Link>
+          </li>
+          <li className='navigation__item'>
+            <Link to='/movies' className='navigation__link'>
               Фильмы
             </Link>
-            </li>
-            <li className="navigation__link-text">
-            <Link
-              to="/saved-movies"
-              className="navigation__link navigation__link_type_save-film"
-            >
-              Сохранённые фильмы
+          </li>
+          <li className='navigation__item'>
+            <Link to='/saved-movies' className='navigation__link'>
+              Сохраненные фильмы
             </Link>
-              </li>
-          </ul>
-          <ul className="navigation__links-account">
-            <li className="navigation__link-text">
-            <Link
-              to="/profile"
-              className="navigation__link navigation__link_type_account"
-            >
+          </li>
+        </ul>
+        <ul className='navigation__list-account'>
+          <li className='navigation__item navigation__item_type_account'>
+            <Link to="/profile" className="navigation__profile navigation__link">
               Аккаунт
             </Link>
-            </li>
-          </ul>
-        </nav>
-      )}
-    </>
-  );
-};
+          </li>
+        </ul>
+      </nav>
+    </div>
+  )
+}
 
 export default Navigation;
