@@ -1,9 +1,8 @@
-import React from 'react';
-import { useEffect, useContext, useState } from 'react';
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useContext, useEffect, useState } from 'react';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 import Header from '../Header/Header'
 import './Profile.css';
-import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 function Profile({ logOut, onUpdateInfo, loggedIn, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
@@ -13,91 +12,90 @@ function Profile({ logOut, onUpdateInfo, loggedIn, isLoading }) {
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateInfo({
-      name: values.name,
-      email: values.email,
+        name: values.name,
+        email: values.email,
     });
-  }
+}
 
-  useEffect(() => {
-    if (currentUser) {
+useEffect(() => {
+  if (currentUser) {
       resetForm(currentUser);
-    }
-  }, [currentUser, resetForm]);
+  }
+}, [currentUser, resetForm]);
 
-  useEffect(() => {
-    if (currentUser.name === values.name && currentUser.email === values.email) {
-      setIsLastEnter(true);
-    } else {
-      setIsLastEnter(false);
-    }
-  }, [values]);
+useEffect(() => {
+  if (currentUser.name === values.name && currentUser.email === values.email) {
+    setIsLastEnter(true);
+  } else {
+    setIsLastEnter(false);
+  }
+}, [values]);
 
   return (
-    <>
+    <div className="">
       <Header loggedIn={loggedIn} theme={{ default: false }} />
       <main className="profile">
-        <form
+        <h2 className="profile__title">
+          {`Привет, ${currentUser.name}!`}
+        </h2>
+
+        <form name="profile__form"
           className="profile__form"
-          name="profile"
-          onSubmit={handleSubmit}
-          noValidate
-        >
-          <h1 className="profile__title">Привет, {currentUser.name}!</h1>
-          <div className="profile__labels-container">
-            <label className="profile__label">
-              <div className="profile__input-block">
-                <span className="profile__label-text">Имя</span>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder="Ваше имя"
-                  className={`profile__input ${errors.name && 'profile__input_error'
-                    }`}
-                  value={values.name || ''}
-                  onChange={handleChange}
-                  minLength="2"
-                  maxLength="30"
-                  pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
-                  required
-                />
-              </div>
-              <span className="profile__error-name">{errors.name || ''}</span>
-            </label>
-            <label className="profile__label">
-              <div className="profile__input-block">
-                <span className="profile__label-text">E-mail</span>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Ваш email"
-                  className={`profile__input ${errors.email && 'profile__input_error'
-                    }`}
-                  value={values.email || ''}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <span className="profile__error">{errors.email || ''}</span>
-            </label>
-          </div>
-          <div className="profile__button-container">
-            <button
-              type="submit"
-              className={`profile__button-edit ${!isValid && 'profile__button-edit_disabled'
-                }`}
-                disabled={!isValid  || isLastEnter || isLoading}
-              onClick={handleSubmit}
-            >
-              Редактировать
-            </button>
-            <a href="/signin" className="profile__link-exit" onClick={logOut}>
-              Выйти из аккаунта
-            </a>
-          </div>
+          onSubmit={handleSubmit}>
+          <label className="profile__input-container">
+            <span className="profile__input-label">
+              Имя
+            </span>
+            <input
+              name="name"
+              type="text"
+              className="profile__input"
+              placeholder="Имя"
+              value={values.name || ''}
+              onChange={handleChange}
+              minLength={2}
+              maxLength={30}
+              required={true} />
+          </label>
+          <span className="auth-form__span-error">{errors.name}</span>
+          <label className="profile__input-container">
+            <span className="profile__input-label">
+              E-mail
+            </span>
+            <input
+              required
+              type="email"
+              name="email"
+              pattern="^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$"
+              className="profile__input"
+              placeholder="почтa"
+              value={values.email || ''}
+              onChange={handleChange}
+            />
+          </label>
+          <span className="auth-form__span-error">{errors.email}</span>
+        <div className="profile__edit">
+          <button
+          onClick={handleSubmit}
+            type="button"
+            form="profile__form"
+            disabled={!isValid  || isLastEnter || isLoading}
+            className={!isValid  || isLastEnter || isLoading
+              ?'profile__button-edit profile__button-edit_inactive'
+              :'profile__button-edit' }>
+            Редактировать
+          </button>
+          <button
+            className="profile__button-logout"
+            type="button"
+            onClick={logOut}>
+            Выйти из аккаунта
+          </button>
+        </div>
         </form>
       </main>
-    </>
-  );
-}
+    </div>
+  )
+};
 
 export default Profile;

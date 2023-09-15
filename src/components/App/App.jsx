@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { SavedMoviesContextProvider } from '../../contexts/SavedMovieContext';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { SavedMoviesContextProvider } from '../../context/SavedMovieContextProvider';
 import ProtectedRoute from '../../hooks/ProtectedRoute';
 import Header from '../Header/Header';
-import Main from '../Pages/Main/Main';
+import Main from "../Pages/Main/Main"
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile'
 import NotFound from '../NotFound/NotFound';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import * as MainApi from '../../utils/MainApi';
+import api from '../../utils/MainApi';
+import InfoTooltip from '../InfoToolTip/InfoToolTip';
 import './App.css';
 
 function App() {
+  const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
   const navigation = useNavigate();
@@ -29,22 +31,25 @@ function App() {
     const jwt = localStorage.getItem('token');
 
     if (jwt) {
-      MainApi.getContent(jwt).then((res) => {
-        if (res) {
-          localStorage.removeItem('allMovies');
-          setloggedIn(true);
-        }
-        navigation(path);
-      })
+      api
+        .getContent(jwt)
+        .then((res) => {
+          if (res) {
+            localStorage.removeItem('allMovies');
+            setloggedIn(true);
+          }
+          navigation(path);
+        })
         .catch((err) => {
           console.log(err);
         });
     }
+
   }, []);
 
   function handleLogin({ email, password }) {
     setIsLoading(true)
-    MainApi
+    api
       .authorize(email, password)
       .then((res) => {
         if (res) {
@@ -57,13 +62,13 @@ function App() {
         setIsSuccess(false);
         console.log(err)
       })
-      .finally(() => {
+    .finally(() => {
         setIsLoading(false);
-      })
+    })
   }
 
   function handleRegister({ name, email, password }) {
-    MainApi.register(name, email, password)
+    api.register(name, email, password)
       .then(() => {
         handleLogin({ email, password });
       })
@@ -81,7 +86,7 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      MainApi.getUserData()
+      api.getUserData()
         .then((userData) => {
           setCurrentUser(userData);
         })
@@ -93,7 +98,7 @@ function App() {
 
   function handleUpdateInfo(newUserInfo) {
     setIsLoading(true);
-    MainApi
+    api
       .editUserData(newUserInfo)
       .then((data) => {
         setIsUpdate(true);
@@ -104,9 +109,9 @@ function App() {
         console.log(err);
         handleUnauthorized(err);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    .finally(() => {
+      setIsLoading(false);
+    });
   }
 
   const handleLogout = () => {
@@ -116,7 +121,12 @@ function App() {
     localStorage.removeItem('search');
     localStorage.removeItem('prevSearchResults')
     navigation('/');
-  }
+  };
+
+  function closePopup() {
+    setIsSuccess(true);
+    setIsUpdate(false);
+}
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -145,12 +155,12 @@ function App() {
               <ProtectedRoute
                 element={SavedMovies}
                 loggedIn={loggedIn} />
-            } />
+            }  />
           <Route
             path='/signin'
             element={!loggedIn
               ?
-              <Login onAuthorize={handleLogin} isLoading={isLoading} />
+              <Login onAuthorize={handleLogin} isLoading={isLoading}/>
               :
               <Navigate to='/movies' />
             } />
@@ -158,10 +168,10 @@ function App() {
             path='/signup'
             element={!loggedIn
               ?
-              <Register onRegister={handleRegister} isLoading={isLoading} />
+              <Register onRegister={handleRegister} isLoading={isLoading}/>
               :
               <Navigate to='/movies' />
-            } />
+            }  />
           <Route
             path='/profile'
             element={(
@@ -173,9 +183,14 @@ function App() {
                 isLoading={isLoading} >
               </ProtectedRoute>
             )} />
+
           <Route path="*" element={<Navigate to="/NotFound" replace />} />
           <Route path="/NotFound" element={<NotFound />} />
         </Routes>
+
+        <InfoTooltip isSuccess={isSuccess} onClose={closePopup} />
+        <InfoTooltip isSuccess={!isUpdate} isUpdate={isUpdate} onClose={closePopup} />
+
       </SavedMoviesContextProvider>
     </CurrentUserContext.Provider>
   );

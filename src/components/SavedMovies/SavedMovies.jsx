@@ -1,10 +1,9 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import SearchForm from '../SearchForm/SearchForm';
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer'
-import * as MainApi from '../../utils/MainApi';
+import Search from '../Search/Search';
+import Footer from '../Footer/Footer';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { useEffect, useState } from 'react';
+import api from '../../utils/MainApi';
 import './SavedMovies.css';
 
 const checkMovieDuration = (movieDuration, isShortsIncluded, shortsDurationCriteria = 40) => {
@@ -18,10 +17,10 @@ const filterMovieByQuerry = (movie, searchQuerry) => {
 
 export const movieFilter = (movie, { querry, includeShorts }) => {
   return (includeShorts && (movie.duration <= 40) && filterMovieByQuerry(movie, querry)) ||
-    (!includeShorts && filterMovieByQuerry(movie, querry));
+         (!includeShorts && filterMovieByQuerry(movie, querry));
 }
 
-function SavedMovies({ loggedIn }) {
+function SavedMovies({loggedIn}) {
   const [savedMovies, setSavedMovies] = useState([]);
   const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
   const [parameters, setParameters] = useState({ querry: '', includeShorts: false });
@@ -29,8 +28,8 @@ function SavedMovies({ loggedIn }) {
   const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    MainApi.getSavedMovies()
+  setIsLoading(true);
+    api.getSavedMovies()
       .then(res => {
         console.log(res);
         setSavedMovies(res);
@@ -42,6 +41,8 @@ function SavedMovies({ loggedIn }) {
         setIsLoading(false);
       })
   }, [setSavedMovies])
+
+
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -56,30 +57,34 @@ function SavedMovies({ loggedIn }) {
     const currentSearchedMovies = savedMovies.filter(movie => movieFilter(movie, parameters));
     if (currentSearchedMovies.length === 0) {
       setIsNotFound(true);
-    } else {
+  } else {
       setIsNotFound(false);
       setSearchedSavedMovies(currentSearchedMovies);
-    }
+  }
     console.log('currentSearchedMovies: ', currentSearchedMovies);
     setSearchedSavedMovies(currentSearchedMovies);
   }, [parameters, savedMovies])
 
+
   return (
-    <section className="saved-movies">
+    <div className="saved-movies">
       <Header loggedIn={loggedIn} theme={{ default: false }} />
-      <SearchForm parameters={parameters}
-        handleSearchSubmit={handleSearchSubmit}
-        setParameters={setParameters}
-      />
+      <Search parameters={parameters}
+         handleSearchSubmit={handleSearchSubmit}
+        setParameters={setParameters} />
       <MoviesCardList
-        moviesData={searchedSavedMovies}
-        isLoading={isLoading}
-        isNotFound={isNotFound}
-      />
+      moviesData={searchedSavedMovies}
+      isLoading={isLoading}
+      isNotFound={isNotFound}  />
       <div className="saved-movies__saveddevider" aria-label="Секция отделяющая карточки от Footer"></div>
       <Footer />
-    </section>
-  );
-};
+    </div>
+  )
+}
 
 export default SavedMovies;
+
+
+
+
+

@@ -4,6 +4,11 @@
   padding-top: 70px;
 }
 
+.login__saveddevider {
+    height: 47px;
+    width: 100%;
+    margin: 0;
+}
 
 @media screen and (max-width: 440px) {
   .login {

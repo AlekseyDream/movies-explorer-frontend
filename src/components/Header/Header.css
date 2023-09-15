@@ -1,17 +1,43 @@
 .header {
-  padding: 18px calc((100% - 1140px) / 2);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 0;
+  width: 100%;
+  margin: 0 auto;
   background-color: #202020;
+}
+
+.header__main {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  max-width: 100%;
+  padding: 18px 70px;
 }
 
 .header_type_promo {
   background-color: #073042;
 }
 
+.header__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0px 70px;
+}
+
+.header__item {
+  list-style-type: none;
+}
+
 .header__logo {
+  display: flex;
   margin: 18px 0;
   width: 38px;
   height: 38px;
@@ -21,6 +47,28 @@
   background-color: inherit;
   border: none;
   cursor: pointer;
+}
+
+.header__logo {
+  transition: all 0.3s ease;
+}
+
+.header__logo:hover {
+  transform: rotate(45deg);
+}
+
+.header__list-logo {
+  margin: 0;
+  padding: 0;
+}
+
+.header__list-logo {
+  padding: 0px;
+  margin: 0px;
+}
+
+.header__list-login {
+  display: flex;
 }
 
 .header__signup {
@@ -66,15 +114,16 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 770px) {
   .header__logo {
     margin: 0;
   }
+
   .header__overlay {
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -18px;
+    left: -30px;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
@@ -85,6 +134,11 @@
   .header__overlay_active {
     opacity: 1;
     visibility: visible;
+  }
+
+
+  .header__container {
+    padding: 0px 65px 0px 0px;
   }
 
   .header__navpanel {
@@ -122,6 +176,7 @@
     width: 26px;
     height: 26px;
     top: -1px;
+    right: -9px;
   }
 }
 
@@ -131,8 +186,8 @@
   }
 
   .header__logo {
-    width: 33px;
-    height: 33px;
+    width: 38px;
+    height: 38px;
   }
 
   .header__signin {
@@ -167,8 +222,16 @@
   }
 
   .header__navpanel-inner {
-    top: -8px;
+    top: -2px;
+    left: 31px;
     height: 37px;
     width: 37px;
+  }
+
+  .header__navpanel-inner_active {
+    top: -9px;
+    left: 37px;
+    height: 33px;
+    width: 33px;
   }
 }

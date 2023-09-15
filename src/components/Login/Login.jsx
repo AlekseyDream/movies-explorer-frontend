@@ -66,8 +66,10 @@ const Login =  ({ onAuthorize, isLoading, loggedIn }) => {
             />
             <span className='auth-form__span-error'>{errors.password}</span>
         </label>
+        <div className="login__saveddevider"></div>
         </Auth>
     )
 }
 
 export default Login
+
