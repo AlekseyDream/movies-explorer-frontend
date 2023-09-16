@@ -7,6 +7,20 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList.jsx';
 import api from '../../utils/MainApi.js';
 import moviesApi from '../../utils/MoviesApi.js';
 import './Movies.css'
+import {
+  MIN_BIG_SCREEN_SIZE,
+  MAX_MEDIUM_SCREEN_SIZE,
+  MIN_MEDIUM_SCREEN_SIZE,
+  MAX_SMALL_SCREEN_SIZE,
+  CARDS_QUANTITY_DECKTOP,
+  CARDS_QUANTITY_TABLET,
+  CARDS_QUANTITY_MOBILE,
+  CARDS_MORE_DECKTOP,
+  CARDS_MORE_MOBILE,
+  NOTHING_FOUND,
+  MOVIES_SERVER_ERROR
+} from "../../utils/config.js";
+
 
 const checkMovieDuration = (movieDuration, isShortsIncluded, shortsDurationCriteria = 40) => {
   return (isShortsIncluded && (movieDuration <= shortsDurationCriteria)) || (!isShortsIncluded && (movieDuration > shortsDurationCriteria));
@@ -22,15 +36,6 @@ export const movieFilter = (movie, { querry, includeShorts }) => {
     (!includeShorts && filterMovieByQuerry(movie, querry));
 }
 
-const getAmountOfCards = () => {
-  const screenWidth = window.innerWidth;
-  if (screenWidth <= 550) {
-    return { totalCards: 5, extraCards: 2 };
-  } else if (screenWidth <= 750) {
-    return { totalCards: 8, extraCards: 2 };
-  }
-  return { totalCards: 16, extraCards: 4 };
-}
 
 const Movies = ({ loggedIn }) => {
   const [allMovies, setAllMovies] = useState([]);
@@ -38,11 +43,28 @@ const Movies = ({ loggedIn }) => {
   const [moviesDisplayed, setMoviesDisplayed] = useState([]);
   const [amountOfCards, setAmountOfCards] = useState(getAmountOfCards());
   const [isButtonVisible, setIsButtonVisible] = useState(true);
-  const {setSavedMovies} = useSavedMoviesContext();
+  const { setSavedMovies } = useSavedMoviesContext();
   const [parameters, setParameters] = useState({ querry: '', includeShorts: false });
   const [serachedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
+  const [shownMoviesQuantity, setShownMoviesQuantity] = useState(0);
+
+
+  const getAmountOfCards = () => {
+    const display = window.innerWidth;
+    if (display > MIN_BIG_SCREEN_SIZE) {
+      setShownMoviesQuantity(CARDS_QUANTITY_DECKTOP);
+    } else if (display > MIN_MEDIUM_SCREEN_SIZE && display < MAX_MEDIUM_SCREEN_SIZE) {
+      setShownMoviesQuantity(CARDS_QUANTITY_TABLET);
+    } else if (display < MAX_SMALL_SCREEN_SIZE) {
+      setShownMoviesQuantity(CARDS_QUANTITY_MOBILE);
+    }
+  }
+
+  useEffect(() => {
+    getAmountOfCards();
+}, []);
 
   useEffect(() => {
     const search = JSON.parse(localStorage.getItem('search'));
@@ -86,16 +108,6 @@ const Movies = ({ loggedIn }) => {
         setIsNotFound(true)
       })
   }, [])
-
-  useEffect(() => {
-    if (localStorage.getItem('search')) {
-      setMoviesDisplayed(serachedMovies.slice(0, amountOfCards.totalCards));
-
-    } else {
-      setMoviesDisplayed(allMovies.slice(0, amountOfCards.totalCards));
-
-    }
-  }, [amountOfCards, serachedMovies, allMovies]);
 
   useEffect(() => {
     setIsButtonVisible(moviesDisplayed.length < serachedMovies.length);
@@ -151,8 +163,8 @@ const Movies = ({ loggedIn }) => {
           isLoading={isLoading}
           moviesData={moviesDisplayed}
           isNotFound={isNotFound} />
-          {isButtonVisible
-        ?
+        {isButtonVisible
+          ?
           <button className="movies-card__more-button"
             type="button" onClick={handleMoreMovies}>
             Ещё
