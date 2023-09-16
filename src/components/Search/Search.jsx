@@ -29,7 +29,6 @@ function Search({ parameters, setParameters, handleSearchSubmit }) {
   }
 
   return (
-    <section className="movies">
       <section className="search-container">
         <form
           className="search__form"
@@ -50,7 +49,6 @@ function Search({ parameters, setParameters, handleSearchSubmit }) {
           <FilterCheckbox checkHandler={handleShortsCheck} isChecked={isShortChecked} />
         </form>
       </section>
-    </section>
   )
 }
 

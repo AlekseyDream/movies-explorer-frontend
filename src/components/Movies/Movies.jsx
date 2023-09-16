@@ -151,10 +151,14 @@ const Movies = ({ loggedIn }) => {
           isLoading={isLoading}
           moviesData={moviesDisplayed}
           isNotFound={isNotFound} />
+          {isButtonVisible
+        ?
           <button className="movies-card__more-button"
             type="button" onClick={handleMoreMovies}>
             Ещё
           </button>
+          : null
+        }
       </main>
       <Footer />
     </div>

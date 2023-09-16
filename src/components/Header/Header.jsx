@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation.jsx';
 import './Header.css';
@@ -17,7 +17,7 @@ function Header({ theme, loggedIn }) {
     <header className={pathname === "/" ? "header header_type_promo" : "header"}>
       {!theme.default && (loggedIn ?
         <div className="header__container">
-          <Link to="/" className="header__logo" />
+          <NavLink to="/" className="header__logo" />
           <div className={`header__overlay ${openNavPanel ? 'header__overlay_active' : ''}`} />
           <button
             className="header__navpanel"
@@ -30,19 +30,21 @@ function Header({ theme, loggedIn }) {
         <div className="header__container header__main">
           <ul className='header__list-logo'>
             <li className='header__item'>
-            <Link to="/" className="header__logo" />
+            <NavLink to="/" className="header__logo" />
             </li>
           </ul>
           <ul className='header__list-login'>
             <li className='header__item'>
-            <Link to="/signup" className="header__signup">
+            <NavLink to="/signup"
+            className={({isActive}) => 'header__signup' + (isActive ? ' header__signup_active' : '')}>
             Регистрация
-          </Link>
+          </NavLink>
             </li>
             <li className='header__item'>
-            <Link to="/signin" className="header__signin">
+            <NavLink to="/signin"
+            className={({isActive}) => 'header__signin' + (isActive ? ' header__signin_active' : '')}>
             Войти
-          </Link>
+          </NavLink>
             </li>
           </ul>
         </div>

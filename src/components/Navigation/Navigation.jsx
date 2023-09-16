@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation({ isOpenNavPanel }) {
@@ -7,26 +7,30 @@ function Navigation({ isOpenNavPanel }) {
       <nav className='navigation__list'>
         <ul className='navigation__list-movies'>
           <li className='navigation__item'>
-            <Link to='/' className='navigation__link navigation__link-home'>
+            <NavLink to='/'
+            className={({isActive}) => 'navigation__link navigation__link-home' + (isActive ? ' navigation__link_active' : '')}>
               Главная
-            </Link>
+            </NavLink>
           </li>
           <li className='navigation__item'>
-            <Link to='/movies' className='navigation__link'>
+            <NavLink to='/movies'
+            className={({isActive}) => 'navigation__link' + (isActive ? ' navigation__link_active' : '')}>
               Фильмы
-            </Link>
+            </NavLink>
           </li>
           <li className='navigation__item'>
-            <Link to='/saved-movies' className='navigation__link'>
+            <NavLink to='/saved-movies'
+            className={({isActive}) => 'navigation__link' + (isActive ? ' navigation__link_active' : '')}>
               Сохраненные фильмы
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <ul className='navigation__list-account'>
           <li className='navigation__item navigation__item_type_account'>
-            <Link to="/profile" className="navigation__profile navigation__link">
+            <NavLink to="/profile"
+            className={({isActive}) => 'navigation__link navigation__profile' + (isActive ? ' navigation__link_active' : '')}>
               Аккаунт
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>

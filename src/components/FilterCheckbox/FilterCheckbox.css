@@ -56,11 +56,14 @@
   background: #343434;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 631px) {
   .search__checkbox {
-    position: relative;
+   /* position: relative;
     top: 91px;
-    right: 94px;
+    right: 94px;*/
+    position: absolute;
+    top: 272px;
+    right: 27%;
   }
 
   .search__text {
