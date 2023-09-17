@@ -8,19 +8,19 @@ function Navigation({ isOpenNavPanel }) {
         <ul className='navigation__list-movies'>
           <li className='navigation__item'>
             <NavLink to='/'
-            className={({isActive}) => 'navigation__link navigation__link-home' + (isActive ? ' navigation__link_active' : '')}>
+            className={({isActive}) => 'navigation__link navigation__link-home' + (isActive && isOpenNavPanel ? ' navigation__link_active' : '')}>
               Главная
             </NavLink>
           </li>
           <li className='navigation__item'>
             <NavLink to='/movies'
-            className={({isActive}) => 'navigation__link' + (isActive ? ' navigation__link_active' : '')}>
+            className={({isActive}) => 'navigation__link' + (isActive && isOpenNavPanel ? ' navigation__link_active' : '')}>
               Фильмы
             </NavLink>
           </li>
           <li className='navigation__item'>
             <NavLink to='/saved-movies'
-            className={({isActive}) => 'navigation__link' + (isActive ? ' navigation__link_active' : '')}>
+            className={({isActive}) => 'navigation__link' + (isActive && isOpenNavPanel? ' navigation__link_active' : '')}>
               Сохраненные фильмы
             </NavLink>
           </li>

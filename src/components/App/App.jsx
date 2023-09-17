@@ -27,8 +27,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
-  const goBack = () => navigate(-1);
-
   useEffect(() => {
     const jwt = localStorage.getItem('token');
 
@@ -186,8 +184,9 @@ function App() {
               </ProtectedRoute>
             )} />
 
-          <Route path="*" element={<Navigate to="/404" replace />} />
-          <Route path="/404" element={<NotFound goBack={goBack} />} />
+          {/* <Route path="*" element={<Navigate to="/404" replace  />} /> */}
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
 
         <InfoTooltip isSuccess={isSuccess} onClose={closePopup} />

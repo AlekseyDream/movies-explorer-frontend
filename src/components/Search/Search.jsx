@@ -1,55 +1,53 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.jsx';
-import './Search.css';
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox.jsx";
+import "./Search.css";
 
-function Search({ parameters, setParameters, handleSearchSubmit }) {
-  const [searchValue, setSearchValue] = useState(parameters.querry);
-  const [isShortChecked, setShortChecked] = useState(parameters.includeShorts);
-  const [prevSearchResults, setPrevSearchResults] = useState([]);
+function Search({
+  searchValue,
+  setSearchValue,
+  isShortChecked,
+  setIsShortChecked,
+  searchAndToggleHandler,
+  isSaved,
+  isLoading
+}) {
+  const formSubmit = (e) => {
+    e.preventDefault();
+    searchAndToggleHandler();
+  };
 
-  const { pathname } = useLocation();
-
-  const handleChange = ({ target }) => {
-    setSearchValue(target.value);
-  }
-  useEffect(() => {
-    setSearchValue(parameters.querry);
-    setShortChecked(parameters.includeShorts);
-    if (pathname === '/movies' && parameters.querry !== '') {
-      localStorage.setItem('search', JSON.stringify(parameters));
-      console.log(localStorage.getItem('search'));
+  const toggleShort = async () => {
+    if (!isSaved) {
+      localStorage.setItem("toggleQuery", !isShortChecked);
+      setIsShortChecked(JSON.parse(localStorage.getItem("toggleQuery")));
+      searchAndToggleHandler();
     }
-  }, [parameters])
-
-
-  const handleShortsCheck = () => {
-    setShortChecked(!isShortChecked);
-    setParameters({ ...parameters, includeShorts: !parameters.includeShorts });
-  }
+    if (isSaved) {
+      setIsShortChecked((prev) => !prev);
+      searchAndToggleHandler();
+    }
+  };
 
   return (
-      <section className="search-container">
-        <form
-          className="search__form"
-          onSubmit={handleSearchSubmit}
-          noValidate
-        >
-          <div className="search__input-block">
-            <input
-              type="text"
-              name="request"
-              placeholder="Фильм"
-              onChange={handleChange}
-              value={searchValue}
-              className="search__input-box"
-              required />
-            <button className="search__button" type='submit'>Найти</button>
-          </div>
-          <FilterCheckbox checkHandler={handleShortsCheck} isChecked={isShortChecked} />
-        </form>
-      </section>
-  )
+    <section className="search-container">
+      <form className="search__form" onSubmit={formSubmit} noValidate>
+        <div className="search__input-block">
+          <input
+            type="text"
+            name="request"
+            placeholder="Фильм"
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
+            className="search__input-box"
+            required
+          />
+          <button className="search__button" type="submit" disabled={isLoading}>
+            Найти
+          </button>
+        </div>
+        <FilterCheckbox isChecked={isShortChecked} toggleShort={toggleShort} />
+      </form>
+    </section>
+  );
 }
 
-export default Search
+export default Search;

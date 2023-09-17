@@ -4,7 +4,7 @@ import Preloader from '../Preloader/Preloader.jsx';
 import SearchError from '../SearchErr/SearchErr.jsx';
 import './MoviesCardList.css';
 
-function MoviesCardList({ moviesData, isLoading, isNotFound }) {
+function MoviesCardList({ moviesData, isLoading, isNotFound, shownMoviesQuantity }) {
   const { pathname } = useLocation();
 
   return (
@@ -13,7 +13,7 @@ function MoviesCardList({ moviesData, isLoading, isNotFound }) {
       {isNotFound && !isLoading && <SearchError errorText={'Ничего не найдено'} />}
       <ul className="movies-cards__list">
         {
-          moviesData.map((movie) => (
+          moviesData.slice(0, shownMoviesQuantity).map((movie) => (
             <MoviesCard key={
               pathname === "/movies"
                 ? movie.id

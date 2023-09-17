@@ -109,12 +109,12 @@
   }
 
   .search-container {
-    padding: 80px 70px 109px;
+    padding: 80px 10px 109px;
+
   }
 
   .search__form {
     justify-content: flex-start;
-    padding-left: 19px;
   }
 
   .search__input-block {
@@ -127,7 +127,7 @@
     text-align: left;
     font-size: 14px;
     line-height: 1.22;
-    padding-left: 0;
+    padding-left: 10px;
     justify-content: space-between;
     background-image: none;
   }

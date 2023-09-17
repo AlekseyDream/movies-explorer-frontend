@@ -1,26 +1,41 @@
-import { useLocation } from 'react-router-dom';
-import { convertMinutes } from '../../utils/СonvertMinutes.js';
-import { useEffect, useState } from 'react';
-import { useSavedMoviesContext } from '../../context/SavedMovieContextProvider.js';
-import api from '../../utils/MainApi.js';
-import './MoviesCard.css';
+import { useLocation } from "react-router-dom";
+import { convertMinutes } from "../../utils/СonvertMinutes.js";
+import { useEffect, useState } from "react";
+import { useSavedMoviesContext } from "../../context/SavedMovieContextProvider.js";
+import api from "../../utils/MainApi.js";
+import "./MoviesCard.css";
+import { useWindowSize } from "../../hooks/useWindowSize.jsx";
+import { SMALL_SCREEN_SIZE } from "../../utils/constants.js";
 
-const checkMovieDuration = (movieDuration, isShortsIncluded, shortsDurationCriteria = 40) => {
-  return (isShortsIncluded && (movieDuration <= shortsDurationCriteria)) || (!isShortsIncluded && (movieDuration > shortsDurationCriteria));
-}
+const checkMovieDuration = (
+  movieDuration,
+  isShortsIncluded,
+  shortsDurationCriteria = 40
+) => {
+  return (
+    (isShortsIncluded && movieDuration <= shortsDurationCriteria) ||
+    (!isShortsIncluded && movieDuration > shortsDurationCriteria)
+  );
+};
 
 const filterMovieByQuerry = (movie, searchQuerry) => {
   const lowerQuerry = searchQuerry.toLowerCase();
   return movie.nameRU.toLowerCase().includes(lowerQuerry);
-}
+};
 
 export const movieFilter = (movie, { querry, includeShorts }) => {
-  return (includeShorts && (movie.duration <= 40) && filterMovieByQuerry(movie, querry)) ||
-    (!includeShorts && filterMovieByQuerry(movie, querry));
-}
+  return (
+    (includeShorts &&
+      movie.duration <= 40 &&
+      filterMovieByQuerry(movie, querry)) ||
+    (!includeShorts && filterMovieByQuerry(movie, querry))
+  );
+};
 
 const MovieButton = ({ onClickHandler, typeClass, children }) => {
-  const buttonModificator = typeClass ? 'movies-card__like' : 'movies-card__unlike';
+  const buttonModificator = typeClass
+    ? "movies-card__like"
+    : "movies-card__unlike";
 
   return (
     <button
@@ -28,13 +43,13 @@ const MovieButton = ({ onClickHandler, typeClass, children }) => {
       type="button"
       onClick={onClickHandler}
     >
-      {typeClass ? '' : children}
+      {typeClass ? "" : children}
     </button>
-  )
+  );
 };
 
 const MovieDeleteButton = ({ onClickHandler, typeClass, children }) => {
-  const buttonModificator = typeClass ? 'movies-card__button_type_unsave' : '';
+  const buttonModificator = typeClass ? "movies-card__button_type_unsave" : "";
 
   return (
     <button
@@ -42,41 +57,52 @@ const MovieDeleteButton = ({ onClickHandler, typeClass, children }) => {
       type="button"
       onClick={onClickHandler}
     >
-      {typeClass ? '' : children}
+      {typeClass ? "" : children}
     </button>
-  )
+  );
 };
 
 function MoviesCard({ movieData }) {
+  const {width: screenWidth} = useWindowSize()
   const { pathname } = useLocation();
   const path = useLocation().pathname;
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const { savedMovies, setSavedMovies } = useSavedMoviesContext();
   const [isDeleted, setIsDeleted] = useState(false);
-  const moviesUrl = 'https://api.nomoreparties.co/';
+  const [hoverDelete, setHoverDelete] = useState(false);
+  const moviesUrl = "https://api.nomoreparties.co/";
 
   useEffect(() => {
-    setIsMovieSaved(savedMovies.some(movie => movie.movieId === movieData.id || movie.movieId === movieData.movieId));
-  }, [savedMovies, movieData])
+    setIsMovieSaved(
+      savedMovies.some(
+        (movie) =>
+          movie.movieId === movieData.id || movie.movieId === movieData.movieId
+      )
+    );
+  }, [savedMovies, movieData]);
 
   function deleteMovie() {
-    const deleteParam = pathname === '/movies'
-      ? movieData.id
-      : movieData.movieId;
+    const deleteParam =
+      pathname === "/movies" ? movieData.id : movieData.movieId;
 
-    const movieToDelete = savedMovies.find(movie => movie.movieId === deleteParam);
-    const movieToDeleteIndex = savedMovies.findIndex(movie => movie.movieId === deleteParam);
+    const movieToDelete = savedMovies.find(
+      (movie) => movie.movieId === deleteParam
+    );
+    const movieToDeleteIndex = savedMovies.findIndex(
+      (movie) => movie.movieId === deleteParam
+    );
 
-    api.deleteSavedMovie(movieToDelete._id)
-      .then(movieData => {
-        setSavedMovies(prevMovies => {
+    api
+      .deleteSavedMovie(movieToDelete._id)
+      .then((movieData) => {
+        setSavedMovies((prevMovies) => {
           const updatedMovies = [...prevMovies];
           updatedMovies.splice(movieToDeleteIndex, 1);
           return updatedMovies;
         });
         setIsDeleted(true);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -95,55 +121,65 @@ function MoviesCard({ movieData }) {
     delete savingMovieInfo.id;
     delete savingMovieInfo.created_at;
     delete savingMovieInfo.updated_at;
-    api.NewSavedMovie(savingMovieInfo)
-      .then(movie => {
+    api
+      .NewSavedMovie(savingMovieInfo)
+      .then((movie) => {
         setSavedMovies([...savedMovies, movie]);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
   if (isDeleted && pathname === "/saved-movies") {
     return null;
   }
 
   return (
     <>
-      <li className="movies-card">
+      <li
+        className="movies-card"
+        onMouseEnter={() => setHoverDelete(true)}
+        onMouseLeave={() => setHoverDelete(false)}
+      >
         <article className="movies-card__item">
           <a href={movieData.trailerLink} target="_blank" rel="noreferrer">
             <img
               className="movies-card__image"
-              src={pathname === "/movies"
-                ? `${moviesUrl}/${movieData.image.url}`
-                : movieData.image}
-              alt={movieData.nameRU} />
+              src={
+                pathname === "/movies"
+                  ? `${moviesUrl}/${movieData.image.url}`
+                  : movieData.image
+              }
+              alt={movieData.nameRU}
+            />
           </a>
         </article>
         <div className="movies-card__description">
           <h2 className="movies-card__title">{movieData.nameRU}</h2>
           <label className="movies-card__label">
-            <input
-              className="movies-card__input"
-              type="checkbox"
-            />
-            {path === '/movies' ? (
-              <MovieButton
-                onClickHandler={isMovieSaved ? deleteMovie : saveMovie}
-                typeClass={isMovieSaved && pathname === "/movies"}>
-              </MovieButton>
-            ) : (
-              <MovieDeleteButton
-                onClickHandler={deleteMovie}
-                typeClass={isMovieSaved === "/movies"}
-              ></MovieDeleteButton>
-            )}
+            <input className="movies-card__input" type="checkbox" />
+            <div className="movies-card__button-block">
+              {path === "/movies" ? (
+                <MovieButton
+                  onClickHandler={isMovieSaved ? deleteMovie : saveMovie}
+                  typeClass={isMovieSaved && pathname === "/movies"}
+                ></MovieButton>
+              ) : (
+                hoverDelete || screenWidth < SMALL_SCREEN_SIZE ? (
+                  <MovieDeleteButton
+                    onClickHandler={deleteMovie}
+                    typeClass={isMovieSaved === "/movies"}
+                  ></MovieDeleteButton>
+                ) : null)}
+            </div>
           </label>
         </div>
-        <span className="movies-card__duration">{convertMinutes(+movieData.duration)}</span>
+        <span className="movies-card__duration">
+          {convertMinutes(+movieData.duration)}
+        </span>
       </li>
     </>
-  )
+  );
 }
 
 export default MoviesCard;

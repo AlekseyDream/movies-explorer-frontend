@@ -1,13 +1,14 @@
 import './FilterCheckbox.css'
 
-function SearchShort({checkHandler, isChecked}) {
+function SearchShort({toggleShort, isChecked}) {
+
   return (
     <label className="search__checkbox">
     <input
       type="checkbox" name="short" id="search-short-toggle"
       className="search__label"
       checked={isChecked}
-      onChange={checkHandler}
+      onChange={toggleShort}
        />
     <label
       className="search__checkbox-label"

@@ -20,10 +20,14 @@
   display: flex;
   align-items: center;
   margin: 0;
-  padding: 0;
+  padding-bottom: 5px;
   width: 100%;
   list-style-type: none;
   white-space: nowrap;
+}
+
+.navigation__link_active{
+  border-bottom: 1px solid white;
 }
 
 .navigation__link_active {

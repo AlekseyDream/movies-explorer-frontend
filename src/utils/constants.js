@@ -1,0 +1,8 @@
+export const BIG_SCREEN_SIZE = 1280
+export const MEDIUM_SCREEN_SIZE = 768
+export const SMALL_SCREEN_SIZE = 480
+export const CARDS_QUANTITY_DECKTOP = 16
+export const CARDS_QUANTITY_TABLET = 12
+export const CARDS_QUANTITY_MOBILE = 5
+export const SHORT_MOVIE_DURATION = 40
+
