@@ -29,7 +29,8 @@ function Navigation({ isOpenNavPanel }) {
           <li className='navigation__item navigation__item_type_account'>
             <NavLink to="/profile"
             className={({isActive}) => 'navigation__link navigation__profile' + (isActive ? ' navigation__link_active' : '')}>
-              Аккаунт
+              <p className="navigation__button-account">Аккаунт</p>
+              <div className="navigation__account-icon"></div>
             </NavLink>
           </li>
         </ul>

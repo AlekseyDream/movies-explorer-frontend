@@ -15,7 +15,6 @@ import {
   CARDS_QUANTITY_TABLET,
   CARDS_QUANTITY_MOBILE,
   MORE_THAN_MEDIUM_SCREEN_SIZE,
-  CARDS_QUANTITY_MORE_THAN_TABLET,
 } from "../../utils/constants.js";
 import { useWindowSize } from "../../hooks/useWindowSize.jsx";
 
@@ -34,9 +33,6 @@ const Movies = ({ loggedIn }) => {
   const handlerCardAmount = () => {
     if (screenWidth >= BIG_SCREEN_SIZE) {
       return setShownMoviesQuantity(CARDS_QUANTITY_DECKTOP);
-    }
-    if (screenWidth < BIG_SCREEN_SIZE && screenWidth >= MORE_THAN_MEDIUM_SCREEN_SIZE) {
-      return setShownMoviesQuantity(CARDS_QUANTITY_MORE_THAN_TABLET);
     }
     if (screenWidth < MORE_THAN_MEDIUM_SCREEN_SIZE && screenWidth >= MEDIUM_SCREEN_SIZE) {
       return setShownMoviesQuantity(CARDS_QUANTITY_TABLET);
@@ -70,8 +66,6 @@ const Movies = ({ loggedIn }) => {
   const handleMoreMovies = () => {
     if (screenWidth >= BIG_SCREEN_SIZE) {
       setShownMoviesQuantity((prev) => prev + 4);
-    } else if (screenWidth < BIG_SCREEN_SIZE && screenWidth >= MORE_THAN_MEDIUM_SCREEN_SIZE) {
-      setShownMoviesQuantity((prev) => prev + 3);
     } else {
       setShownMoviesQuantity((prev) => prev + 2);
     }

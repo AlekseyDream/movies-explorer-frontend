@@ -73,14 +73,11 @@
 }
 
 .navigation__profile {
-  position: relative;
   display: flex;
   align-items: center;
   font-weight: 500;
   font-size: 13px;
   line-height: 12px;
-  padding-left: 11px;
-  padding-right: 37px;
   min-height: 26px;
   border-radius: 40px;
 }
@@ -93,12 +90,26 @@
   width: 26px;
   height: 100%;
   border-radius: 50px;
+}
+
+.navigation__button-account {
+  color: white;
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 12px;
+  margin: 0 10px 0 0;
+}
+
+.navigation__account-icon {
+  width: 26px;
+  height: 26px;
   background-color: #313131;
+  border-radius: 50%;
   background-image: url('../../images/icon-main.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
-
 
 .navigation__link-home {
   display: none;
