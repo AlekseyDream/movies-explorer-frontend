@@ -26,14 +26,9 @@
   white-space: nowrap;
 }
 
-.navigation__link_active{
-  border-bottom: 1px solid white;
-}
-
 .navigation__link_active {
   font-weight: 500;
 }
-
 
 .navigation__link:hover {
   opacity: 0.8;
@@ -130,7 +125,7 @@
   }
 
   .navigation_active {
-    right: 60px;
+    right: 0px;
     transition: right 0.3s ease-in-out;
   }
 
@@ -204,7 +199,7 @@
 }
 
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .navigation {
     width: 320px;
   }
@@ -219,7 +214,7 @@
   }
 
   .navigation_active {
-    right: 22px;
+    right: 0px;
     transition: right 0.3s ease-in-out;
   }
 

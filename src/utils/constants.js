@@ -1,6 +1,6 @@
-export const BIG_SCREEN_SIZE = 1280
+export const BIG_SCREEN_SIZE = 1279
 export const MORE_THAN_MEDIUM_SCREEN_SIZE = 950
-export const MEDIUM_SCREEN_SIZE = 709
+export const MEDIUM_SCREEN_SIZE = 767
 export const SMALL_SCREEN_SIZE = 480
 export const CARDS_QUANTITY_DECKTOP = 16
 export const CARDS_QUANTITY_MORE_THAN_TABLET = 12

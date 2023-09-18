@@ -14,7 +14,6 @@ import {
   CARDS_QUANTITY_DECKTOP,
   CARDS_QUANTITY_TABLET,
   CARDS_QUANTITY_MOBILE,
-  MORE_THAN_MEDIUM_SCREEN_SIZE,
 } from "../../utils/constants.js";
 import { useWindowSize } from "../../hooks/useWindowSize.jsx";
 
@@ -30,21 +29,57 @@ const Movies = ({ loggedIn }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
 
-  const handlerCardAmount = () => {
+  /*const handlerCardAmount = () => {
     if (screenWidth >= BIG_SCREEN_SIZE) {
       return setShownMoviesQuantity(CARDS_QUANTITY_DECKTOP);
     }
-    if (screenWidth < MORE_THAN_MEDIUM_SCREEN_SIZE && screenWidth >= MEDIUM_SCREEN_SIZE) {
+
+    if (screenWidth >= 1180 ) {
+      return setShownMoviesQuantity(CARDS_QUANTITY_DECKTOP);
+    }
+
+    if (screenWidth >= 768 ) {
       return setShownMoviesQuantity(CARDS_QUANTITY_TABLET);
     }
-    if (screenWidth < MEDIUM_SCREEN_SIZE) {
+   /* if (screenWidth < MORE_THAN_MEDIUM_SCREEN_SIZE && screenWidth >= MEDIUM_SCREEN_SIZE) {
+      return setShownMoviesQuantity(CARDS_QUANTITY_TABLET);
+    }*/
+
+  /* if (screenWidth <= MEDIUM_SCREEN_SIZE) {
       return setShownMoviesQuantity(CARDS_QUANTITY_MOBILE);
     }
-  }
+  }*/
+
+  /* const handlerCardAmount = () => {
+    if (screenWidth > 1279) {
+      setShownMoviesQuantity(16);
+    } else if (screenWidth <= 1279) {
+      setShownMoviesQuantity(16);
+    }
+   else if (screenWidth <= 1180) {
+      setShownMoviesQuantity(8);
+    }
+
+   else if (screenWidth > 767) {
+      setShownMoviesQuantity(8);
+    } else {
+      setShownMoviesQuantity(5);
+    }
+  };*/
+
+  const handlerCardAmount = () => {
+    if (screenWidth > BIG_SCREEN_SIZE) {
+      setShownMoviesQuantity(CARDS_QUANTITY_DECKTOP);
+    } else if (screenWidth > MEDIUM_SCREEN_SIZE) {
+      setShownMoviesQuantity(CARDS_QUANTITY_TABLET);
+    } else {
+      setShownMoviesQuantity(CARDS_QUANTITY_MOBILE);
+    }
+  };
 
   //! screen wiidth
   useEffect(() => {
-    handlerCardAmount()
+    handlerCardAmount();
   }, [screenWidth]);
 
   useEffect(() => {
@@ -62,10 +97,11 @@ const Movies = ({ loggedIn }) => {
       });
   }, [setSavedMovies]);
 
-
   const handleMoreMovies = () => {
-    if (screenWidth >= BIG_SCREEN_SIZE) {
+    if (screenWidth > BIG_SCREEN_SIZE) {
       setShownMoviesQuantity((prev) => prev + 4);
+    } else if (screenWidth > MEDIUM_SCREEN_SIZE) {
+      setShownMoviesQuantity((prev) => prev + 2);
     } else {
       setShownMoviesQuantity((prev) => prev + 2);
     }
@@ -78,44 +114,49 @@ const Movies = ({ loggedIn }) => {
     const isInLocalMovies = localStorage.getItem("moviesDisplayed");
 
     if (isInLocalSearch !== null) setSearchValue(isInLocalSearch);
-    if (isInLocalToggle !== null) setIsShortChecked(JSON.parse(isInLocalToggle));
-    if (isInLocalMovies !== null) setMoviesDisplayed(JSON.parse(isInLocalMovies));
+    if (isInLocalToggle !== null)
+      setIsShortChecked(JSON.parse(isInLocalToggle));
+    if (isInLocalMovies !== null)
+      setMoviesDisplayed(JSON.parse(isInLocalMovies));
   }, []);
 
   // эта функция отавечает за поиск и фильтрацию
   const searchAndToggleHandler = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const getToggleFromLocal = JSON.parse(localStorage.getItem("toggleQuery"));
     localStorage.setItem("searchQuery", searchValue);
-    handlerCardAmount()
+    handlerCardAmount();
     if (prevSearchResults.length === 0) {
       const firstFetch = await moviesApi.getMovies();
       setPrevSearchResults(firstFetch);
       localStorage.setItem("prevSearchFilms", JSON.stringify(firstFetch));
-      const isShortMovies = durationFilms(getToggleFromLocal, firstFetch)
+      const isShortMovies = durationFilms(getToggleFromLocal, firstFetch);
       const filteredFilms = filterFilms(searchValue, isShortMovies);
       setMoviesDisplayed(filteredFilms);
       localStorage.setItem("moviesDisplayed", JSON.stringify(filteredFilms));
     } else {
-      const isShortMovies = durationFilms(getToggleFromLocal, prevSearchResults)
+      const isShortMovies = durationFilms(
+        getToggleFromLocal,
+        prevSearchResults
+      );
       const filteredFilms = filterFilms(searchValue, isShortMovies);
       setMoviesDisplayed(filteredFilms);
       localStorage.setItem("moviesDisplayed", JSON.stringify(filteredFilms));
     }
-    const amountOfFilms = JSON.parse(localStorage.getItem("moviesDisplayed"))
-    setIsNotFound(false)
+    const amountOfFilms = JSON.parse(localStorage.getItem("moviesDisplayed"));
+    setIsNotFound(false);
     if (amountOfFilms == 0) {
-      setIsNotFound(true)
+      setIsNotFound(true);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
-//хелперы
+  //хелперы
   const durationFilms = (toggle, films) => {
     return toggle
-    ? films.filter((movie) => movie.duration < SHORT_MOVIE_DURATION)
-    : films;
-  }
+      ? films.filter((movie) => movie.duration < SHORT_MOVIE_DURATION)
+      : films;
+  };
 
   const filterFilms = (query, filmsList) => {
     const list = filmsList.filter(
@@ -126,14 +167,13 @@ const Movies = ({ loggedIn }) => {
     return list;
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     if (moviesDisplayed.length > shownMoviesQuantity) {
-      setIsButtonVisible(true)
+      setIsButtonVisible(true);
+    } else {
+      setIsButtonVisible(false);
     }
-    else{
-      setIsButtonVisible(false)
-    }
-  }, [moviesDisplayed, shownMoviesQuantity])
+  }, [moviesDisplayed, shownMoviesQuantity]);
   return (
     <div>
       <Header loggedIn={loggedIn} theme={{ default: false }} />

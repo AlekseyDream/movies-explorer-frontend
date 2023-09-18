@@ -1,7 +1,7 @@
 .movies-card {
   box-sizing: border-box;
   background-color: #202020;
-  width: inherit;
+  width: 270px;
   position: relative;
 }
 
@@ -148,6 +148,9 @@
 }
 
 @media screen and (max-width: 770px) {
+  .movies-card {
+    width: 300px;
+  }
 
   .movies-card__image {
     height: 190px;
